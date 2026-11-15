@@ -1,0 +1,318 @@
+{
+  "categories": [
+    {
+      "id": "account",
+      "label": "Account & login",
+      "description": "Your account, OTPs and access",
+      "icon": "user-round"
+    },
+    {
+      "id": "discovery",
+      "label": "Profiles & discovery",
+      "description": "Finding people and showing interest",
+      "icon": "heart"
+    },
+    {
+      "id": "messages",
+      "label": "Messages & stories",
+      "description": "Chats, reactions and stories",
+      "icon": "message-circle"
+    },
+    {
+      "id": "video",
+      "label": "Video calls",
+      "description": "Permissions, calling and call costs",
+      "icon": "video"
+    },
+    {
+      "id": "coins",
+      "label": "Coins & purchases",
+      "description": "Coins, credits and receipts",
+      "icon": "wallet"
+    },
+    {
+      "id": "earnings",
+      "label": "Earnings & withdrawals",
+      "description": "Eligibility and payout questions",
+      "icon": "badge-indian-rupee"
+    },
+    {
+      "id": "safety",
+      "label": "Privacy & safety",
+      "description": "Blocking, reporting and your data",
+      "icon": "shield-check"
+    },
+    {
+      "id": "technical",
+      "label": "Troubleshooting",
+      "description": "Fixing common app and web issues",
+      "icon": "settings"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-01",
+      "category": "account",
+      "question": "Who can use LUVZY?",
+      "answer": "LUVZY is intended for adults aged 18 or older. You must meet the age and eligibility requirements described in our Terms of Service."
+    },
+    {
+      "id": "faq-02",
+      "category": "account",
+      "question": "How do I create a LUVZY account?",
+      "answer": "Select Join now and follow the registration steps displayed in the website or app. The required details and verification steps may vary by platform and release."
+    },
+    {
+      "id": "faq-03",
+      "category": "account",
+      "question": "I am not receiving my OTP. What should I do?",
+      "answer": "Check your phone number and country code, signal, blocked messages and any SMS-filtering settings. Wait for the resend option before requesting another code. Do not share your OTP with anyone."
+    },
+    {
+      "id": "faq-04",
+      "category": "account",
+      "question": "I cannot sign in. How can I regain access?",
+      "answer": "Use the sign-in recovery or resend-code options shown on your login screen. If your account is restricted, use the support request form below with the registered contact detail. Never include your OTP or password."
+    },
+    {
+      "id": "faq-05",
+      "category": "account",
+      "question": "Can I change my registered phone number or email?",
+      "answer": "Check your account or profile settings for the currently supported editing options. Some verified contact details may require a re-verification step or help from support."
+    },
+    {
+      "id": "faq-06",
+      "category": "account",
+      "question": "How do I delete my account?",
+      "answer": "Use the in-app account deletion option or the dedicated web deletion request at /delete-account once available. Deleting an account is different from logging out or hiding a profile. See the Privacy Policy for data handling and retention details."
+    },
+    {
+      "id": "faq-07",
+      "category": "discovery",
+      "question": "How do I discover people on LUVZY?",
+      "answer": "Open Discover to view profiles and suggestions available to your account. Results may depend on profile details, preferences, activity, eligibility and the features enabled in the current release."
+    },
+    {
+      "id": "faq-08",
+      "category": "discovery",
+      "question": "How can I update my profile photos or bio?",
+      "answer": "Open your profile or account settings and use the edit controls shown there. Upload only photos and content that you have permission to share."
+    },
+    {
+      "id": "faq-09",
+      "category": "discovery",
+      "question": "What happens when I send someone an interest?",
+      "answer": "An interest is a way to show you would like to connect. It does not guarantee a reply or permission to message or call. The recipient decides whether to engage."
+    },
+    {
+      "id": "faq-10",
+      "category": "discovery",
+      "question": "Why can I see an interest button but not a call button?",
+      "answer": "Available actions can differ by account type, eligibility, feature rollout and the other person’s settings. Use the actions shown on their profile; never try to bypass a restricted interaction."
+    },
+    {
+      "id": "faq-11",
+      "category": "discovery",
+      "question": "Why is a profile missing from my suggestions?",
+      "answer": "The person may be offline, unavailable, hidden, blocked or outside your current discovery settings. Suggestions can change; LUVZY does not guarantee any specific profile remains visible."
+    },
+    {
+      "id": "faq-12",
+      "category": "messages",
+      "question": "How can I start a conversation?",
+      "answer": "Open the messaging feature when it is enabled for your account and choose a permitted connection. Interest, match or other access rules may apply before messaging is available."
+    },
+    {
+      "id": "faq-13",
+      "category": "messages",
+      "question": "Why can’t I send a message?",
+      "answer": "Check your connection and whether messaging is enabled for that interaction. An account restriction, block, unavailable chat, or temporary service issue may also prevent sending."
+    },
+    {
+      "id": "faq-14",
+      "category": "messages",
+      "question": "Can I delete or unsend a message?",
+      "answer": "Use the message options shown in your current app version. Removing a message on your device may not remove a copy already seen, saved or captured by another person."
+    },
+    {
+      "id": "faq-15",
+      "category": "messages",
+      "question": "How do stories work?",
+      "answer": "Stories let you share temporary photos or videos where the feature is enabled. Check the story screen for current limits, visibility controls and expiration information before posting."
+    },
+    {
+      "id": "faq-16",
+      "category": "messages",
+      "question": "Can people react or reply to my story?",
+      "answer": "Where enabled, viewers can use available reactions or reply controls. Manage story privacy and remove anything you do not want others to view. Never post someone else’s private content without permission."
+    },
+    {
+      "id": "faq-17",
+      "category": "video",
+      "question": "How do I start a video call?",
+      "answer": "Open a profile or the call area and look for an available call action. A call requires the other participant’s willingness, an eligible account and working camera/microphone permissions."
+    },
+    {
+      "id": "faq-18",
+      "category": "video",
+      "question": "Why is my camera or microphone not working?",
+      "answer": "Check the browser or device permission prompts, close other apps using the camera, and try again. On the web, use an up-to-date browser and a secure HTTPS connection when deployed."
+    },
+    {
+      "id": "faq-19",
+      "category": "video",
+      "question": "Will I be charged Coins for a video call?",
+      "answer": "Some video-call features may use Coins. Before starting a paid call, the app should show the applicable per-minute or other rate and any balance requirements. Check the call screen for the current price."
+    },
+    {
+      "id": "faq-20",
+      "category": "video",
+      "question": "What happens if I run out of Coins during a call?",
+      "answer": "When Coin-based calling is enabled, low-balance notices and automatic call ending may apply. Your actual balance and usage rules should be displayed during the call; contact support if the ledger appears incorrect."
+    },
+    {
+      "id": "faq-21",
+      "category": "video",
+      "question": "What if a call disconnects unexpectedly?",
+      "answer": "Try a stable connection and restart the call if available. If Coins were deducted incorrectly, note the call time and transaction reference and send a support request."
+    },
+    {
+      "id": "faq-22",
+      "category": "video",
+      "question": "Are video calls recorded?",
+      "answer": "Review the Privacy Policy and any notice shown on the call screen for LUVZY’s current media-handling practices. Other participants may still capture what appears on their screens, so avoid sharing sensitive information."
+    },
+    {
+      "id": "faq-23",
+      "category": "coins",
+      "question": "How do I buy Coins?",
+      "answer": "Open the Coins or Wallet section, review the pack price, currency, taxes and quantity shown at checkout, and use the supported payment flow. Available packages may change."
+    },
+    {
+      "id": "faq-24",
+      "category": "coins",
+      "question": "My payment succeeded, but Coins are missing. What now?",
+      "answer": "Refresh the balance and review transaction history. If the Coins are still missing, submit a support request with the order ID, date, charged amount and the payment platform. Do not share full card details or OTPs."
+    },
+    {
+      "id": "faq-25",
+      "category": "coins",
+      "question": "How can I see where my Coins were used?",
+      "answer": "Check the Coins, Wallet or transaction-history screen for credited and debited activity where available. For an unfamiliar deduction, share its reference with support."
+    },
+    {
+      "id": "faq-26",
+      "category": "coins",
+      "question": "Can I transfer Coins to another account or withdraw purchased Coins?",
+      "answer": "Purchased Coins are intended for supported in-app features and are not the same as earnings. Transfers, cash redemption and withdrawals are not available unless a specific feature and its terms explicitly allow them."
+    },
+    {
+      "id": "faq-27",
+      "category": "coins",
+      "question": "Can I request a refund for a Coin purchase?",
+      "answer": "Refund eligibility depends on the payment method, app-store rules, the disclosed purchase terms and applicable law. Contact support with the order reference or use the purchase platform’s refund process."
+    },
+    {
+      "id": "faq-28",
+      "category": "coins",
+      "question": "Can Coin prices or call rates change?",
+      "answer": "Yes, offers and rates may be updated. Always review the latest price and charging information shown before you confirm a purchase or paid interaction."
+    },
+    {
+      "id": "faq-29",
+      "category": "earnings",
+      "question": "Does using LUVZY guarantee that I can earn money?",
+      "answer": "No. Earnings, if offered, are available only under a defined eligible programme and its published rules. Creating a profile or receiving Coins does not automatically create a cash entitlement."
+    },
+    {
+      "id": "faq-30",
+      "category": "earnings",
+      "question": "How can I request a withdrawal?",
+      "answer": "If the Earnings area and withdrawals are enabled for your account, follow the eligibility information and request steps shown there. Purchased Coins and eligible earnings should be treated separately."
+    },
+    {
+      "id": "faq-31",
+      "category": "earnings",
+      "question": "Why is my withdrawal request not available?",
+      "answer": "The feature may not be enabled, or your account may not meet the current programme criteria such as minimum eligible balance, verification or payout-method requirements. Check the programme terms before applying."
+    },
+    {
+      "id": "faq-32",
+      "category": "earnings",
+      "question": "Where can I see a withdrawal request status?",
+      "answer": "Where withdrawals are supported, the Earnings or Withdrawal History screen should show available request details. If a status seems incorrect, contact support with the request reference."
+    },
+    {
+      "id": "faq-33",
+      "category": "earnings",
+      "question": "How long does a withdrawal take?",
+      "answer": "Processing time depends on the actual payment programme and provider, and must be published before withdrawals are enabled. Do not rely on an estimated payout time unless it is displayed in your account or official programme terms."
+    },
+    {
+      "id": "faq-34",
+      "category": "safety",
+      "question": "How do I report inappropriate behaviour?",
+      "answer": "Use the Report option on a profile, story, chat or call where available. Include factual details and relevant evidence, but do not share unnecessary sensitive information."
+    },
+    {
+      "id": "faq-35",
+      "category": "safety",
+      "question": "How do I block someone?",
+      "answer": "Look for Block in the member’s profile or conversation controls. Blocking should stop supported interactions; check your account controls for the exact effect in the current release."
+    },
+    {
+      "id": "faq-36",
+      "category": "safety",
+      "question": "What should I do if someone asks for money or an OTP?",
+      "answer": "Do not share OTPs, passwords, card numbers or banking credentials. Avoid off-platform money requests. Block and report suspicious accounts, and contact your bank or local authorities promptly if you think you have been defrauded."
+    },
+    {
+      "id": "faq-37",
+      "category": "safety",
+      "question": "Who can see my profile, photos and stories?",
+      "answer": "Visibility depends on the current privacy controls and the sharing setting for each feature. Before posting, review those controls and the Privacy Policy. Other members may save or capture content they can view."
+    },
+    {
+      "id": "faq-38",
+      "category": "safety",
+      "question": "How do I request a copy or deletion of my data?",
+      "answer": "Use available privacy controls or the contact process described in /privacy-policy. For full account deletion, use /delete-account when implemented. Some records may be retained where required by law or for valid disputes."
+    },
+    {
+      "id": "faq-39",
+      "category": "safety",
+      "question": "How can I stay safe if I meet someone in person?",
+      "answer": "Meet in a public place, let a trusted person know your plan, arrange independent transport, protect financial details and leave if you feel uncomfortable. LUVZY cannot verify every person or guarantee an offline meeting."
+    },
+    {
+      "id": "faq-40",
+      "category": "technical",
+      "question": "The site or app is slow. What should I try?",
+      "answer": "Check your connection, close heavy background apps, refresh or restart, and update your browser or app. If it continues, share the device, app version, time and steps to reproduce with support."
+    },
+    {
+      "id": "faq-41",
+      "category": "technical",
+      "question": "I’m not receiving notifications. What can I check?",
+      "answer": "Confirm notification permission in your device or browser settings, check any in-app preferences and make sure battery-saving modes are not restricting the app."
+    },
+    {
+      "id": "faq-42",
+      "category": "technical",
+      "question": "The video keeps freezing. How can I improve it?",
+      "answer": "Switch to a reliable Wi-Fi or mobile connection, close other video apps, reduce network congestion and retry. A stable connection for both participants matters."
+    },
+    {
+      "id": "faq-43",
+      "category": "technical",
+      "question": "Why is a feature missing in my account?",
+      "answer": "Some features are restricted by eligibility, permissions, rollout stage or account settings. Your current app and website versions may not include every feature shown in a prototype."
+    },
+    {
+      "id": "faq-44",
+      "category": "technical",
+      "question": "How can I report a bug?",
+      "answer": "Use the support request form and describe the issue, device/browser, page, approximate time and reproduction steps. Never send OTPs, passwords or full payment credentials."
+    }
+  ]
+}

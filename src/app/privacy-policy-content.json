@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "app": "LUVZY",
+    "lastUpdated": "12 November 2026",
+    "operator": "[INSERT LEGAL ENTITY / INDIVIDUAL OPERATOR NAME]",
+    "privacyEmail": "[INSERT VERIFIED EMAIL ADDRESS]",
+    "address": "[INSERT BUSINESS ADDRESS AND COUNTRY]",
+    "draft": true
+  },
+  "sections": [
+    {
+      "id": "who-we-are",
+      "title": "Who we are",
+      "paragraphs": [
+        "LUVZY (the “Service”) is a dating and social-connection platform available through its website and mobile application. This Privacy Policy explains how the organisation operating LUVZY collects, uses, discloses, retains, and protects personal information when you use the Service.",
+        "The organisation responsible for your personal data is [INSERT LEGAL ENTITY / INDIVIDUAL OPERATOR NAME], located at [INSERT BUSINESS ADDRESS AND COUNTRY]."
+      ],
+      "reviewNote": "Replace the legal operator and address with verified information before launch."
+    },
+    {
+      "id": "information-we-collect",
+      "title": "Information we collect",
+      "paragraphs": [
+        "We collect information you provide, information generated when you use LUVZY, and limited information from service providers where relevant. Some information is needed to operate an account; other information is optional."
+      ],
+      "table": {
+        "headers": [
+          "Category",
+          "Examples",
+          "Why it is used"
+        ],
+        "rows": [
+          [
+            "Account and eligibility",
+            "Mobile number, email (if used), login/OTP events, name or nickname, date of birth or age confirmation.",
+            "Sign up, authenticate, keep your account secure, and enforce our adults-only requirement."
+          ],
+          [
+            "Profile and preferences",
+            "Profile photos, bio, gender you choose to disclose, interests, relationship preferences, city or approximate location, profile settings.",
+            "Create your profile, support discovery, display information you choose to share, and personalise suggestions."
+          ],
+          [
+            "Interactions and content",
+            "Interests, likes, matches, messages, stories, photos/videos you upload, blocking and reporting activity.",
+            "Deliver messaging and social features, operate your content, and address safety reports."
+          ],
+          [
+            "Video and calling",
+            "Camera/microphone streams during calls; call participants, connection time, duration, technical quality and error data.",
+            "Enable live calls, troubleshoot connection issues, help prevent misuse."
+          ],
+          [
+            "Coins and transactions",
+            "Coin balance, purchases, transaction reference, payment status, refund/chargeback events and withdrawal details where applicable.",
+            "Manage in-app balances, purchases, eligible payouts, support and fraud prevention."
+          ],
+          [
+            "Device and usage",
+            "IP address, device or app identifiers, operating system, pages/screens visited, crash logs, security events and cookie data.",
+            "Run and secure the Service, fix errors, and measure performance."
+          ],
+          [
+            "Support and safety",
+            "Support requests, evidence supplied with reports, communications with our team and moderation decisions.",
+            "Answer requests, investigate complaints and protect members."
+          ]
+        ]
+      },
+      "note": "Your profile and dating preferences can reveal personal or sensitive information. Share only information you are comfortable providing and, where a field is publicly visible, showing to other members."
+    },
+    {
+      "id": "sources",
+      "title": "Where information comes from",
+      "bullets": [
+        "Directly from you, such as registration details, your profile, uploaded media, messages, and support requests.",
+        "Automatically from your use of the website or app, including device diagnostics, login events, usage and call connection details.",
+        "From third parties you choose to use or interact with, such as payment processors, sign-in providers, and anti-fraud or technical service providers, when enabled."
+      ]
+    },
+    {
+      "id": "use-of-data",
+      "title": "How we use your information",
+      "bullets": [
+        "To create and manage accounts, verify access, enforce the 18+ eligibility rule and provide customer support.",
+        "To offer discovery, interests, messaging, stories, video introductions and relevant recommendations.",
+        "To track coins, handle purchases, manage refund or withdrawal workflows and maintain financial records.",
+        "To detect spam, fraud, harassment, account abuse, and security incidents, and respond to reports.",
+        "To improve performance, understand feature reliability, communicate service updates and meet legal obligations."
+      ],
+      "paragraphs": [
+        "Where permission or consent is required, we will request it through an appropriate notice or in-app control. We will not treat agreement to this policy alone as permission for unrelated processing."
+      ]
+    },
+    {
+      "id": "visibility",
+      "title": "What other members can see",
+      "paragraphs": [
+        "Other LUVZY members may see your chosen display name, profile pictures, bio, public interests, profile details you elect to show, and public or audience-shared stories. Members you interact with can see the interests, messages, and other content you send them. Visibility depends on the features and privacy controls available in your account.",
+        "Other users may save or capture content they can view, including through screenshots or recordings on their own devices. LUVZY cannot guarantee that content shared with another member will remain private after they receive it."
+      ],
+      "note": "Avoid sharing passwords, bank details, identity documents or your precise address in a public profile or chat."
+    },
+    {
+      "id": "communication",
+      "title": "Chats, stories and video calls",
+      "paragraphs": [
+        "Messaging and stories involve processing the text, images, videos and other content you create or send so those features work. Reported material may be reviewed when necessary for moderation, safety, legal compliance or dispute resolution.",
+        "Video calls need camera and microphone permission. A video service provider may process live audio/video streams, connection identifiers and technical diagnostics to deliver a call. We may process participant and session metadata for service functionality, billing, moderation and troubleshooting.",
+        "If LUVZY offers call recording, we will explain whether and when recording occurs, why it is needed, who can access it, and how long it is retained, and request any permissions required by law."
+      ],
+      "reviewNote": "Launch check: verify the exact recording, screenshot, moderation and video-service-provider practices and revise this paragraph to match the product."
+    },
+    {
+      "id": "payments",
+      "title": "Coins, purchases and withdrawals",
+      "paragraphs": [
+        "If you purchase coins or request an eligible withdrawal, we process the amount, transaction reference, wallet ledger, status, and customer-support details needed to complete or investigate the transaction. Payment and payout partners may independently collect and process payment credentials, bank details and legally required verification information.",
+        "Our payment or payout partners may collect payment credentials, bank details and legally required verification information directly. Their own privacy notices may also apply to information they receive. Information collected by LUVZY for financial verification will be described when requested."
+      ]
+    },
+    {
+      "id": "permissions",
+      "title": "Device permissions and location",
+      "bullets": [
+        "Camera and microphone: requested when you use video, voice or media-capture features.",
+        "Photos or media: accessed when you select files to upload or grant the app relevant device permissions.",
+        "Notifications: used for messages, interests, call alerts, and service information if you opt in.",
+        "Location: during website registration, the browser may ask to share device coordinates and its reported accuracy for location-based features. Sharing location is optional; GPS-level precision is not guaranteed.",
+        "Contacts: access would be requested only if a contacts-based feature is offered and you choose to use it."
+      ],
+      "paragraphs": [
+        "You can adjust location permission in your browser settings. Registration can continue without location; other device permissions can be changed in operating-system settings. Turning permissions off may limit features that need them."
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "Cookies, analytics and communications",
+      "paragraphs": [
+        "Our website may use necessary cookies or similar storage for sessions, security, and remembering settings. If analytics, advertising or nonessential tracking tools are enabled, their purposes, providers and consent options must be separately disclosed as required.",
+        "We may send essential account and service messages. Promotional notifications or marketing messages should be controlled by a separate preference or unsubscribe option where applicable."
+      ]
+    },
+    {
+      "id": "sharing",
+      "title": "When we share information",
+      "bullets": [
+        "With other members, only as needed for the profile, messaging, discovery, calling and sharing features you use.",
+        "With contracted providers such as hosting, database/storage, video infrastructure, message delivery, analytics, anti-abuse, customer support and payment/payout providers, to perform their services under appropriate safeguards.",
+        "With authorities or advisers if required by applicable law, legal process, or to respond to a valid safety or security concern.",
+        "In a lawful business transaction such as a merger or acquisition, subject to applicable notices and protections.",
+        "With a third party when you specifically direct us or provide an appropriate permission."
+      ],
+      "paragraphs": [],
+      "reviewNote": "Review and name actual third-party SDKs and vendors, data processing agreements, and app-store data disclosures."
+    },
+    {
+      "id": "choices",
+      "title": "Your choices and consent",
+      "bullets": [
+        "Edit supported account or profile fields and adjust who can see information where controls exist.",
+        "Change camera, microphone, notification, photo and location permissions through your device settings.",
+        "Block or report other members using the safety features available in the app.",
+        "Withdraw optional permissions or marketing consent using available settings or by contacting the privacy team.",
+        "Ask for access, correction, export, erasure or other actions when available under applicable law."
+      ],
+      "paragraphs": [
+        "Withdrawing permission can affect the associated feature. Requests may require reasonable identity verification to protect your account."
+      ]
+    },
+    {
+      "id": "retention",
+      "title": "How long we keep information",
+      "paragraphs": [
+        "We retain information only for purposes such as operating an active account, delivering features, preventing abuse, resolving disputes, and meeting applicable legal or accounting requirements. Deletion or de-identification occurs when the relevant purpose and legally required retention period end."
+      ],
+      "table": {
+        "headers": [
+          "Information",
+          "Typical retention approach",
+          "Before launch"
+        ],
+        "rows": [
+          [
+            "Account and profile",
+            "While the account is active, followed by the verified account-deletion process, except lawful retained records.",
+            "Define deletion and backup-purge timelines."
+          ],
+          [
+            "Chats, stories and uploads",
+            "According to message/content lifecycle and account deletion, subject to moderation or legal holds.",
+            "Verify story expiry, media cleanup and message retention."
+          ],
+          [
+            "Security, abuse reports and call metadata",
+            "Only as long as necessary for security review, dispute resolution or legal duties.",
+            "Specify periods for logs, reports and metadata."
+          ],
+          [
+            "Purchases, wallet and payout records",
+            "For tax, accounting, fraud-prevention and other legal requirements where applicable.",
+            "Confirm jurisdiction-specific periods."
+          ]
+        ]
+      },
+      "reviewNote": "Launch check: replace this high-level description with actual documented retention periods and a tested deletion workflow. Do not promise immediate erasure if backups, financial records or legal holds require exceptions."
+    },
+    {
+      "id": "deletion",
+      "title": "Account deletion and data removal",
+      "paragraphs": [
+        "You should be able to request deletion from your account settings and through a publicly accessible website route without needing to reinstall the app. After verification, LUVZY will disable and delete or de-identify associated personal data according to the implemented deletion workflow, except information that must lawfully be retained for security, disputes, payments or legal obligations.",
+        "Account deletion is different from simply logging out, hiding a profile, or deactivating an account. The deletion experience should explain what will be removed, what may be retained, and how outstanding balances or unresolved withdrawals are handled."
+      ],
+      "reviewNote": "Launch check: build and verify an actual /delete-account page and an in-app Settings → Delete Account flow. A privacy policy alone does not implement account deletion."
+    },
+    {
+      "id": "security",
+      "title": "How we protect information",
+      "paragraphs": [
+        "We aim to use appropriate technical and organisational safeguards, including access restrictions, secure transmission, authentication controls, monitoring, and internal procedures designed to reduce unauthorised access, misuse, loss or disclosure.",
+        "No website, app, or data transmission system can be guaranteed completely secure. You should use a secure device, keep verification codes private, report suspicious activity, and avoid sending sensitive financial or identification information to other members."
+      ],
+      "reviewNote": "Before publishing security claims, verify the actual encryption, access-control, incident-response and vendor practices implemented in LUVZY."
+    },
+    {
+      "id": "rights",
+      "title": "Your privacy rights",
+      "paragraphs": [
+        "Depending on where you live and which laws apply, you may have rights to receive information about processing, access certain personal data, request correction or erasure, withdraw consent, raise a grievance, or exercise another legally available right. Some requests are subject to identity checks, lawful exceptions and verification.",
+        "To exercise a right or raise a privacy concern, use the published contact method below. Once relevant privacy authorities’ complaint mechanisms are applicable and operational for your jurisdiction, you may also have the right to raise a complaint with them."
+      ]
+    },
+    {
+      "id": "adults",
+      "title": "Adults only",
+      "paragraphs": [
+        "LUVZY is intended only for people aged 18 or older. We do not knowingly permit minors to create accounts. If we reasonably learn that an account belongs to a person under 18, we may suspend access, review the situation, and delete information as required.",
+        "If you believe a minor is using LUVZY, please notify the safety or privacy contact listed below."
+      ]
+    },
+    {
+      "id": "transfers",
+      "title": "International processing",
+      "paragraphs": [
+        "LUVZY and its service providers may process information in countries other than the one where you live, depending on the hosting, messaging, video calling, payment and support vendors actually selected. Where personal data is transferred internationally, we will use safeguards and restrictions required by applicable law."
+      ],
+      "reviewNote": "Verify server regions, cross-border data flows and restrictions for all launch markets and vendors."
+    },
+    {
+      "id": "changes",
+      "title": "Changes to this policy",
+      "paragraphs": [
+        "We may update this Privacy Policy as the Service, its vendors or legal requirements change. When changes are material, we will provide appropriate notice through the app, website, or an account contact channel as required. The “Last updated” date at the top indicates the version of this document."
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact and grievances",
+      "paragraphs": [
+        "For questions about this policy, privacy requests, grievances, safety concerns or account deletion, contact the operator of LUVZY using the verified details below.",
+        "Privacy contact email: [INSERT VERIFIED EMAIL ADDRESS]. Privacy/grievance contact name or role: [INSERT CONTACT OR RESPONSIBLE ROLE]. Registered business address: [INSERT ADDRESS]."
+      ],
+      "reviewNote": "Add a real privacy email, owner/grievance contact, and valid account deletion/contact link."
+    }
+  ]
+}

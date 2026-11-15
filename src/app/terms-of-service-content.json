@@ -1,0 +1,206 @@
+{
+  "lastUpdated": "12 November 2026",
+  "sections": [
+    {
+      "id": "agreement",
+      "title": "Agreement and service operator",
+      "paragraphs": [
+        "These Terms of Service (the “Terms”) govern access to and use of LUVZY, a dating and social-connection service offered through a website, mobile application and related features (the “Service”). By creating an account or using the Service, you agree to these Terms and any policies expressly incorporated by reference, including the Privacy Policy and Community Guidelines.",
+        "LUVZY is operated by [INSERT VERIFIED LEGAL ENTITY / INDIVIDUAL OPERATOR], with its registered business address at [INSERT VERIFIED ADDRESS AND COUNTRY]. “LUVZY”, “we”, “us” and “our” refer to this operator. If you do not agree to the Terms, do not use the Service.",
+        "Where applicable law grants you non-waivable consumer or privacy rights, these Terms do not limit those rights. The Service is intended for personal, lawful use rather than professional or commercial use unless we expressly authorize it."
+      ]
+    },
+    {
+      "id": "eligibility",
+      "title": "Eligibility: adults aged 18+",
+      "paragraphs": [
+        "You must be at least 18 years old and legally able to enter into this agreement. You may not use the Service if you are under 18, prohibited from using it under applicable law, or previously removed for a serious violation unless we expressly authorize re-entry.",
+        "You must provide accurate age and registration details. We may request proportionate verification or suspend an account if we reasonably suspect the eligibility requirements have not been met.",
+        "Before publishing: Google Play has specific age-restriction requirements for dating and random-connection apps. A text-only age declaration does not replace appropriate age-gating and Play Console settings."
+      ]
+    },
+    {
+      "id": "account-security",
+      "title": "Account creation and security",
+      "paragraphs": [
+        "We may implement registration, device, phone, email, abuse-prevention or identity checks consistent with applicable law and our Privacy Policy. Verification signals are not a guarantee of another user's identity.",
+        "Provide accurate account details and keep verification codes, passwords and device access secure. Do not sell, share, transfer or permit another person to use your account without authorization.",
+        "You are responsible for activity through your account to the extent permitted by law, except where caused by our own actions or failures. Tell us promptly if you suspect unauthorized access."
+      ]
+    },
+    {
+      "id": "what-luvzy-provides",
+      "title": "What LUVZY provides",
+      "paragraphs": [
+        "LUVZY may offer profile discovery, interests or matching, stories, chat, random suggestions or introductions, live video conversations, notifications, and optional paid features. Availability depends on your account eligibility, location, device, platform version, feature configuration, and the conditions displayed in the Service.",
+        "Features and user eligibility rules that materially affect access or payments must be clearly described in the relevant screen before use. We do not promise that anyone will respond, form a relationship, agree to a call or meeting, or behave in a particular way."
+      ]
+    },
+    {
+      "id": "respect-consent",
+      "title": "Respect, consent and safe behaviour",
+      "paragraphs": [
+        "LUVZY is built for consensual interactions between adults. Treat other members with respect. A profile, like, interest, message or call request never constitutes consent to sexual contact, recording, payment or continued communication.",
+        "You must not use LUVZY to harass, threaten, stalk, exploit, deceive or discriminate against anyone; promote violence or illegal activity; distribute intimate content without permission; or pressure another person for money, sexual activity or personal information.",
+        "Do not use the Service to facilitate trafficking, coercion, scams, impersonation, or the sale of prohibited goods or services. Follow the Community Guidelines and all laws that apply to your use."
+      ],
+      "bullets": [
+        "Respect a refusal, block or request to stop.",
+        "No harassment, bullying, hate speech, threats, intimidation, coercion or repeated unwanted contact.",
+        "No sexual exploitation, trafficking, illegal sexual services, non-consensual intimate material, child sexual abuse material or any attempt to involve minors.",
+        "No impersonation, scams, payment demands, credential theft or deceptive requests for money.",
+        "No doxxing, disclosure of someone else’s private information, or sharing a person’s photo or recording without appropriate rights and consent.",
+        "No bots, scraping, spam or automated outreach."
+      ],
+      "note": "Before publishing: the Community Guidelines must define prohibited conduct, enforcement steps and actual reporting/blocking tools."
+    },
+    {
+      "id": "profiles-media",
+      "title": "Profiles, media and stories",
+      "paragraphs": [
+        "You retain the rights you own in photos, videos, text, stories and other content you submit (“Your Content”). You represent that you have the rights and consents required to submit it and that its publication does not violate another person's rights.",
+        "You grant LUVZY a limited, non-exclusive, worldwide, royalty-free licence to host, store, reproduce, adapt and display Your Content only as reasonably required to operate, secure and improve the Service, including for the audiences and privacy settings you select. The licence ends when Your Content is deleted from active systems, subject to backups, legal duties and copies already shared with other users.",
+        "You must not download, republish, sell or commercially exploit another member's content without permission. Content may be reviewed or removed under the Community Guidelines."
+      ]
+    },
+    {
+      "id": "messages",
+      "title": "Messages, interests and interactions",
+      "paragraphs": [
+        "Messages, interests, replies and other interactions must be lawful and respectful. Do not send unsolicited sexual material, dangerous links, fraudulent payment requests or communications designed to pressure another member.",
+        "The receiving member may save, screenshot or share what they see. Do not assume a message is fully private after delivery. We may restrict interaction patterns to prevent abuse or protect users."
+      ]
+    },
+    {
+      "id": "video-calls",
+      "title": "Video calls and introductions",
+      "paragraphs": [
+        "Video features require a compatible device, an internet connection and permissions such as camera and microphone access. Each participant may refuse or end a call at any time. Do not record, stream, capture or redistribute another member's call or images without all consents and permissions required by law.",
+        "Where a call consumes Coins, the price or charge rate, expected use, charging start/stop rules and low-balance behavior must be disclosed in the call interface before charges apply. A call may end automatically when the available balance is insufficient, as displayed in the product.",
+        "Call availability and audio/video quality depend on technical and network conditions. We do not guarantee uninterrupted communications. Actual platform recording practices, if any, must be described in the Privacy Policy and appropriate in-product notices."
+      ]
+    },
+    {
+      "id": "coins",
+      "title": "Coins and digital purchases",
+      "paragraphs": [
+        "LUVZY may sell virtual coins (“Coins”) for specified digital features. Before checkout, the Service must show the current price, currency, number of Coins, applicable taxes or fees, and any material usage conditions. Published terms apply to completed purchases; prospective changes do not rewrite them.",
+        "Purchased Coins are a limited, personal, revocable licence to use supported LUVZY features. They are not legal tender, a bank deposit, an investment or a stored-value payment account. Unless applicable law requires otherwise, purchased Coins cannot be redeemed or withdrawn as cash, sold or transferred.",
+        "We may make corrections for errors, duplicate credits, chargebacks or proven fraudulent transactions, subject to applicable law and a fair support process. Do not promise that purchased Coins expire unless an expiry rule is established and shown before purchase."
+      ],
+      "table": {
+        "headers": ["How the terms apply", "Details"],
+        "rows": [
+          ["Buying coins", "See final payable amount, Coins credited and platform billing rules before confirming payment."],
+          ["Using coins", "The applicable feature or per-minute rate is displayed in the app; balances and usage appear in the account ledger."],
+          ["Payment problems", "Report failed crediting, incorrect deductions or duplicate charges through the support channel."],
+          ["Refund requests", "Handled under the published refund policy, the payment platform’s rules and mandatory consumer law."]
+        ]
+      }
+    },
+    {
+      "id": "earnings-withdrawals",
+      "title": "Eligible earnings and withdrawal requests",
+      "paragraphs": [
+        "If LUVZY offers an earnings or creator/reward programme, eligibility, calculation method, minimum withdrawal, fees, payout schedule, identity or tax checks, deductions, dispute process and supported payout methods must be published in separate programme terms before participation. No user is entitled to a payout solely because an amount appears on screen.",
+        "Purchased Coins and withdrawable earnings must be recorded and treated separately. Eligibility to receive earnings does not make purchased Coins redeemable. We may delay or restrict a payout affected by suspected fraud, chargebacks, safety violations or legal restrictions, with a process for review.",
+        "Any advertised earnings are not guaranteed. The final programme terms must comply with applicable law and payment-platform policies."
+      ],
+      "note": "Before publishing: Launch decision required: finalize whether withdrawals are enabled, who qualifies, earning calculation, fees, KYC/tax requirements and payout dispute handling."
+    },
+    {
+      "id": "billing-refunds",
+      "title": "Billing, refunds and chargebacks",
+      "paragraphs": [
+        "Payments may be processed by an app store or another payment provider. Their checkout, billing, cancellation and refund terms may also apply. Review the price, renewal period and payment method shown before confirming a purchase.",
+        "For subscriptions purchased through a third party, manage renewal and cancellation through that provider where required. Except where law or the applicable provider requires otherwise, digital purchases are final once delivered. This does not limit mandatory consumer rights.",
+        "Contact [INSERT VERIFIED BILLING SUPPORT CONTACT] promptly about an unrecognized charge. We may suspend paid features or investigate a transaction where a payment is reversed, disputed or appears unauthorized, while following applicable law and provider rules."
+      ]
+    },
+    {
+      "id": "reports-blocking",
+      "title": "Reports, blocking and moderation",
+      "paragraphs": [
+        "You can use available in-product tools to block users and report content or conduct that may violate these Terms or create a safety concern. Include enough detail for us to understand the issue, but do not submit another person’s sensitive information unless it is needed for the report.",
+        "We may review reports, preserve relevant information when legally permitted, remove content, restrict features, suspend accounts or take other proportionate action. We may consider context, severity, history, reliability and safety. We do not guarantee that every report will result in a particular outcome or response time.",
+        "Where available and required by law, we will provide a way to appeal certain moderation decisions. Nothing in this section prevents you from contacting emergency services when someone faces immediate danger."
+      ]
+    },
+    {
+      "id": "offline-safety",
+      "title": "Offline meetings and personal safety",
+      "paragraphs": [
+        "You are responsible for your choices when communicating or meeting with another user. Protect your home address, financial details, identity documents and other sensitive information. Consider meeting in a public place, arranging your own transport and telling someone you trust about your plans.",
+        "LUVZY does not conduct background checks unless we expressly say otherwise, and a profile or platform verification indicator is not a guarantee of identity, character or safety. Use your judgment and stop contact if you feel unsafe."
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy, permissions and personal data",
+      "paragraphs": [
+        "Our Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and the choices available to you. It forms part of these Terms and should be read alongside them.",
+        "Device permissions such as camera, microphone, photos and notifications are optional unless a feature needs them to work. You can manage permissions in your device settings. Turning a permission off may limit the related feature.",
+        "We may disclose or preserve information when reasonably necessary to provide the Service, protect people, investigate abuse, comply with law or enforce these Terms, as described in the Privacy Policy."
+      ]
+    },
+    {
+      "id": "suspension-deletion",
+      "title": "Suspension, termination and account deletion",
+      "paragraphs": [
+        "You may stop using LUVZY at any time and request account deletion through the available account controls or by contacting [INSERT VERIFIED PRIVACY CONTACT]. We may need to verify your request before acting.",
+        "We may restrict or end access if we reasonably believe you breached these Terms, created a safety or legal risk, or if we discontinue the Service. Where appropriate and legally permitted, we will explain the reason and available appeal route.",
+        "After deletion or termination, some information may remain in backups for a limited period or be retained where necessary for legal, safety, fraud-prevention or dispute purposes. Deletion does not automatically reverse completed purchases or remove content another user has already received."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "title": "Our intellectual property",
+      "paragraphs": [
+        "LUVZY and its licensors own the Service, including its software, design, name, logos and other materials, except for User Content and third-party materials. These Terms grant you a limited, personal, revocable, non-transferable right to use the Service for its intended purpose.",
+        "Do not copy, modify, distribute, sell, reverse engineer or create derivative works from the Service except where applicable law permits or we give written permission. Send copyright or other intellectual-property notices to [INSERT VERIFIED RIGHTS CONTACT AND PROCESS]."
+      ]
+    },
+    {
+      "id": "third-parties",
+      "title": "Third-party services and app stores",
+      "paragraphs": [
+        "The Service may link to or rely on third-party services, including app stores, payment providers and device platforms. Those services are governed by their own terms and privacy notices. LUVZY does not control third-party services and is not responsible for their availability or practices, subject to rights that cannot be excluded by law.",
+        "If you download LUVZY through an app store, the applicable store terms may give that store and its affiliates rights as third-party beneficiaries of the relevant app-store provisions. Any required store-specific terms must be added before publication."
+      ]
+    },
+    {
+      "id": "availability",
+      "title": "Changes, availability and service interruptions",
+      "paragraphs": [
+        "We work to keep LUVZY available, but the Service may be interrupted for maintenance, security, technical issues, provider outages or events outside our reasonable control. We do not promise continuous or error-free operation.",
+        "We may update or discontinue features. If a change materially affects your rights or paid access, we will provide notice or options where required by law. We may also apply updates needed for security, legal compliance or safe operation."
+      ]
+    },
+    {
+      "id": "disclaimers",
+      "title": "Disclaimers and limits of liability",
+      "paragraphs": [
+        "To the extent permitted by law, the Service is provided “as available” and without warranties that cannot be excluded. We do not warrant that user-provided information is accurate, that another user is who they claim to be, or that the Service will meet every expectation.",
+        "Nothing in these Terms excludes or limits liability, consumer protections, remedies or warranties that applicable law does not allow us to exclude or limit. Subject to that rule, the final terms for allocating liability, including any cap or excluded loss, must be reviewed for the operator’s jurisdiction before publication."
+      ],
+      "note": "Legal review required: insert jurisdiction-appropriate liability language. Do not treat this draft as legal advice or a final limitation of liability."
+    },
+    {
+      "id": "governing-law",
+      "title": "Governing law and disputes",
+      "paragraphs": [
+        "These Terms and disputes arising from the Service will be governed by [INSERT VERIFIED GOVERNING LAW AND JURISDICTION], subject to any mandatory consumer protections that apply where you live.",
+        "Before filing a formal claim, you may contact us at [INSERT VERIFIED DISPUTE CONTACT] so we can try to resolve the issue. Any required complaint, mediation, arbitration, court or consumer-redress process must be stated here after legal review. No term limits a right that cannot legally be waived."
+      ],
+      "note": "Replace every bracketed jurisdiction and dispute placeholder with approved legal details."
+    },
+    {
+      "id": "contact",
+      "title": "Contact, notices and grievances",
+      "paragraphs": [
+        "For support, legal notices or questions about these Terms, contact [INSERT VERIFIED SUPPORT EMAIL AND POSTAL ADDRESS]. Notices are effective when received, unless applicable law provides otherwise.",
+        "For privacy requests, contact [INSERT VERIFIED PRIVACY CONTACT]. For complaints or grievances, contact [INSERT VERIFIED GRIEVANCE OFFICER, EMAIL, POSTAL ADDRESS AND RESPONSE TIMELINE]. The operator must confirm that these channels are monitored and legally appropriate before publication."
+      ]
+    }
+  ]
+}

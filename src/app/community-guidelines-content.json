@@ -1,0 +1,229 @@
+{
+  "title": "Community Guidelines",
+  "lastUpdated": "13 November 2026",
+  "status": "Draft — verify operations before publication",
+  "sections": [
+    {
+      "id": "everyone-is-an-adult",
+      "title": "Adults only: 18+ eligibility",
+      "tag": "Eligibility",
+      "intro": "LUVZY is intended exclusively for adults aged 18 and above. People under 18 must not create accounts, use the service or appear as participants in user profiles or live dating interactions.",
+      "bullets": [
+        "Use your correct age and birth date. Do not pretend to be older or help anyone bypass age controls.",
+        "Do not invite, contact, recruit or deliberately connect minors through LUVZY.",
+        "If you suspect an account belongs to a minor, stop interacting and report it promptly."
+      ],
+      "callout": "A declaration of age is not a substitute for actual technical age restrictions. LUVZY must configure app and server-side age safeguards before launch."
+    },
+    {
+      "id": "be-real",
+      "title": "Be authentic. No impersonation or catfishing",
+      "tag": "Honesty",
+      "intro": "Build genuine connections using a profile that accurately represents you. Trust is difficult to rebuild once it is lost.",
+      "bullets": [
+        "Use your own photos and information, or content you have clear permission to use.",
+        "No fake or duplicate accounts created to deceive, impersonation of public figures or other members, or misleading claims about identity.",
+        "Do not claim you work for LUVZY, its safety team or an external agency when you do not.",
+        "Do not artificially inflate popularity, likes, interest or engagement using bots or purchased interactions."
+      ]
+    },
+    {
+      "id": "consent-and-boundaries",
+      "title": "Consent and personal boundaries come first",
+      "tag": "Respect",
+      "intro": "Every interaction must be voluntary. Matching, sending an interest, accepting a message, purchasing coins, or joining a video call never implies consent to anything else.",
+      "bullets": [
+        "Ask before sharing intimate topics or requesting photos, calls or contact information.",
+        "Respect a ‘no’, an unanswered message, a declined call or a block. Do not create another account to contact someone who has declined.",
+        "Never pressure someone into sharing personal information, meeting in person, sending money, or doing anything intimate.",
+        "Stop an interaction promptly when someone expresses discomfort or withdraws consent."
+      ]
+    },
+    {
+      "id": "kind-conversations",
+      "title": "Communicate respectfully",
+      "tag": "Respect",
+      "intro": "Talk to others as you would want to be treated, even when interest is not mutual. Disagreement is not a licence to intimidate someone.",
+      "bullets": [
+        "No repeated unwanted messages, sexual remarks directed at someone without consent, insults, bullying, threats or humiliation.",
+        "Do not attempt to manipulate users through guilt, emotional coercion or pressure to spend money.",
+        "Never encourage self-harm, violence, dangerous behavior or offline retaliation.",
+        "Do not use calls, reactions or story replies to harass someone after they disengage."
+      ]
+    },
+    {
+      "id": "hate-and-harassment",
+      "title": "No hate, discrimination or targeted abuse",
+      "tag": "Safety",
+      "intro": "LUVZY does not allow content or conduct that attacks, threatens, dehumanizes or excludes people because of protected or personal characteristics.",
+      "bullets": [
+        "No hateful slurs, targeted harassment or violent extremist praise or recruitment.",
+        "No threats of violence, stalking, blackmail, extortion or threats to disclose private information.",
+        "No campaigns to shame, mass-report or dogpile another person.",
+        "Do not use profile prompts, photos, messages or stories to direct abuse toward a person or group."
+      ]
+    },
+    {
+      "id": "sexual-content",
+      "title": "Sexual content and exploitation are prohibited",
+      "tag": "Content",
+      "intro": "LUVZY is for respectful dating and communication, not pornography, coercion, sexual services, or exploitation. Rules also apply during private video calls and direct messages.",
+      "bullets": [
+        "No pornography, explicit sexual acts, unsolicited nudity or obscene sexual displays on profiles, stories, messages or video calls.",
+        "No non-consensual intimate images, deepfake sexual images, sexual blackmail, recording or distribution of intimate media without permission.",
+        "No solicitation, advertising or facilitation of prostitution, trafficking or exploitative sexual services.",
+        "Never pressure someone to perform sexual acts, send intimate content or move to an unmoderated channel."
+      ],
+      "callout": "An adult-only service does not permit pornography, sexual exploitation or non-consensual content. The same safety standards apply across every LUVZY feature."
+    },
+    {
+      "id": "child-safety",
+      "title": "Zero tolerance: child sexual abuse and exploitation",
+      "tag": "Critical safety",
+      "intro": "LUVZY explicitly prohibits child sexual abuse and exploitation (CSAE) and child sexual abuse material (CSAM), including any attempt to use the platform to contact, groom, exploit, solicit, coerce or endanger a child.",
+      "bullets": [
+        "Never create, upload, share, request, promote, facilitate or distribute CSAM or material depicting the sexual exploitation of minors.",
+        "No grooming, sextortion, sexualization of minors, attempts to arrange sexual contact with minors, or discussions that facilitate their abuse.",
+        "Do not share suspicious material with other users. Use the in-app reporting route when available or the official support channel.",
+        "LUVZY may remove prohibited content, disable accounts and report suspected exploitation to competent authorities where required by applicable law."
+      ],
+      "callout": "If a child is in immediate danger, contact local emergency services or law enforcement. The operator must establish a trained child-safety contact, a CSAM response process, and legally required reporting procedures before launch."
+    },
+    {
+      "id": "protect-privacy",
+      "title": "Protect private information",
+      "tag": "Privacy",
+      "intro": "Privacy is a basic condition of trust. Only share your own information, and be careful when other people ask for yours.",
+      "bullets": [
+        "No doxxing: do not publish or threaten to publish someone’s address, workplace, phone, identity documents or financial details without authorization.",
+        "Do not take screenshots, record calls or distribute messages, images or stories of others without appropriate consent and legal rights.",
+        "Never request OTPs, passwords, card data, bank-login credentials or account-recovery details.",
+        "Avoid posting details that reveal someone else’s location or identify a person who has not agreed to be featured."
+      ]
+    },
+    {
+      "id": "photos-and-stories",
+      "title": "Photos, profiles and stories",
+      "tag": "Content",
+      "intro": "Profiles and stories should help people understand who you are, not mislead, shock or harm them.",
+      "bullets": [
+        "Share original media or material you are authorized to post. Respect copyright and other people's image rights.",
+        "No stolen images, graphic violence, hateful symbols used to intimidate, sexually explicit images, or harmful misinformation used to target people.",
+        "Never post minors in an intimate or exploitative context; report suspected exploitation immediately.",
+        "Do not use stories, captions or replies for harassment, payment demands, spam or private-information leaks."
+      ]
+    },
+    {
+      "id": "video-introductions",
+      "title": "Video calls and live introductions",
+      "tag": "Live safety",
+      "intro": "A live video conversation should feel voluntary and safe. Video access is not permission to record, harass or expose another person.",
+      "bullets": [
+        "Dress and behave appropriately. Do not display sexual activity, nudity, violence or dangerous acts.",
+        "Do not secretly record, stream, photograph or repost another member’s call without valid consent and legal authority.",
+        "Do not impersonate another user, show an unrelated video in place of yourself to deceive, or threaten a participant.",
+        "If someone makes you uncomfortable, end the call and report or block them using available controls."
+      ],
+      "callout": "App-store rules are especially strict about random or anonymous live chat. The operator should verify whether the planned random-call model is allowed on every distribution platform before release."
+    },
+    {
+      "id": "coins-and-earnings",
+      "title": "Coins, gifts and earnings must never be used to pressure people",
+      "tag": "Financial safety",
+      "intro": "If LUVZY offers digital coins, paid video introductions or eligible earnings, all related interactions must remain transparent, voluntary and free of coercion.",
+      "bullets": [
+        "No threats, manipulation or guilt-based pressure to buy coins, extend calls, give gifts or request withdrawals.",
+        "Do not promise romance, an offline meeting or exclusive attention in exchange for unauthorized payments.",
+        "No attempt to manipulate balances, use stolen payment methods, create fraudulent transactions or exploit payout systems.",
+        "Only rely on official in-app prices, eligibility criteria, balances and verified payment or withdrawal flows."
+      ],
+      "callout": "Coin values, call rates, payment processors and withdrawals must match the final Terms of Service and the implemented backend before publication."
+    },
+    {
+      "id": "scams",
+      "title": "No scams, phishing or financial exploitation",
+      "tag": "Financial safety",
+      "intro": "Romance scams and financial fraud are prohibited. No one should need to transfer money to prove affection or trust.",
+      "bullets": [
+        "Do not request off-platform transfers, gift cards, cryptocurrency, investments, loans or emergency funds under deceptive pretenses.",
+        "No phishing links, credential theft, fake giveaways, fraudulent charities or fake customer-support messages.",
+        "Do not lure people to unsafe websites or impersonate a payment provider, moderator or bank.",
+        "Report suspected scams without sending money or exposing your personal credentials."
+      ]
+    },
+    {
+      "id": "spam-and-abuse",
+      "title": "No spam, automation or platform abuse",
+      "tag": "Platform integrity",
+      "intro": "LUVZY should be a place for real people, not unsolicited promotions or tools designed to bypass its protections.",
+      "bullets": [
+        "No mass unsolicited messages, misleading advertisements, recruiting schemes or unauthorized commercial solicitation.",
+        "No bots, scripts, scraping, fake engagement, unauthorized bulk-account creation or coordinated manipulation.",
+        "Do not bypass blocks, suspensions, limits, age restrictions, call eligibility checks or payment rules.",
+        "Do not upload malware, probe the service for vulnerabilities without authorization or attempt to access another account."
+      ]
+    },
+    {
+      "id": "offline-meetings",
+      "title": "Use good judgment when meeting offline",
+      "tag": "Personal safety",
+      "intro": "LUVZY cannot independently verify everything a person says and cannot guarantee anyone’s behavior outside the service.",
+      "bullets": [
+        "Consider a public first meeting, a separate travel plan and telling a trusted person where you are going.",
+        "Keep personal address, financial information and identity documents private until you choose to share them.",
+        "Be alert to requests for secrecy, urgent financial help, coercion or pressure to travel.",
+        "If you feel unsafe, leave the situation when you can and contact local emergency services when appropriate."
+      ]
+    },
+    {
+      "id": "report-and-block",
+      "title": "How to report or block",
+      "tag": "Get help",
+      "intro": "If an interaction violates these guidelines, you can stop engaging and use the relevant reporting or blocking control if it is available in your version of LUVZY.",
+      "bullets": [
+        "From a profile, message, story or call, use the in-app Report or Block action where provided.",
+        "Choose the closest reason and explain what happened. Share only evidence you are comfortable providing and that the app permits.",
+        "For account, safety or abuse concerns, use the official Help & FAQ support route. Never publish sensitive evidence publicly.",
+        "For an immediate threat or crime in progress, contact emergency services; a platform report is not an emergency-response channel."
+      ],
+      "callout": "Before launch, implement and test in-app reporting for users and content, blocking in direct interactions, a support intake path, and a process for reviewing urgent safety reports."
+    },
+    {
+      "id": "moderation",
+      "title": "Reviews, enforcement and account restrictions",
+      "tag": "Enforcement",
+      "intro": "When we receive credible reports or otherwise become aware of potentially prohibited conduct, LUVZY may review relevant information in accordance with its Privacy Policy and applicable law.",
+      "bullets": [
+        "Depending on severity and evidence, actions may include content removal, warnings, restricted features, temporary suspension or permanent account termination.",
+        "Severe conduct—including child sexual exploitation, credible threats, sexual extortion, trafficking and repeated harassment—may lead to immediate restrictions.",
+        "Where legally required, suspected unlawful activity may be reported to competent authorities and records may be retained for legal or safety purposes.",
+        "We seek proportionate decisions and may consider context and repeat behavior; we cannot guarantee a specific outcome for every report."
+      ]
+    },
+    {
+      "id": "appeals",
+      "title": "Questions, corrections and appeals",
+      "tag": "Your options",
+      "intro": "If you believe a moderation decision was made in error, use the official Help Centre and provide the relevant account and case information when a case reference exists.",
+      "bullets": [
+        "Describe the decision you want reviewed and any factual corrections.",
+        "Do not share passwords, one-time codes, card details or someone else’s intimate images with support.",
+        "Do not create new accounts to evade an active suspension while your case is reviewed.",
+        "The availability and scope of an appeal may depend on applicable law, the type of decision and the available review process."
+      ],
+      "callout": "Publish an accessible review/appeal route, verified safety contact details and serviceable response procedures before launch."
+    },
+    {
+      "id": "updates-and-contact",
+      "title": "Updates, related policies and contact",
+      "tag": "Information",
+      "intro": "We may revise these Community Guidelines as LUVZY develops or legal and platform requirements change. Material changes should be communicated appropriately, and the current version should remain available on this page.",
+      "bullets": [
+        "Read the Terms of Service for legal terms, coins, payments and eligibility conditions.",
+        "Read the Privacy Policy for data handling, retention and account-deletion information.",
+        "Use Help & FAQ for account assistance, reports or questions about these standards.",
+        "The published version should include the responsible operator’s verified safety and child-safety contact information."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+.standalone-page {
+  width: 100%;
+  flex: 1;
+}
+
+.standalone-page .luvzy-guidelines,
+.standalone-page .luvzy-help,
+.standalone-page .luvzy-delete {
+  min-height: 0;
+}
+
+.landing-section {
+  scroll-margin-top: 90px;
+}
+
+@media (max-width: 740px) {
+  .app-shell:has(.bottom-nav) > .landing-footer {
+    padding-bottom: 86px;
+  }
+}
