@@ -22,6 +22,10 @@ import './earnings.css';
 
 const repository = new LocalProfileRepository();
 const EXPLORE_PAGE_SIZE = 8;
+const randomCallPlaceholder: Person = {
+  id: 0, name: 'Your next connection', age: 0, city: '', bio: '', work: '', interests: [],
+  photo: '', role: 'girl', distance: '',
+};
 const profilePhotos = {
   boy: Array.from({ length: 38 }, (_, index) => `/images/users/men/man_${String(index + 1).padStart(3, '0')}.webp`),
   girl: Array.from({ length: 41 }, (_, index) => `/images/users/women/wome_${String(index + 1).padStart(3, '0')}.webp`),
@@ -589,19 +593,15 @@ function HomePage() {
   const candidates = people.filter((person) => person.role !== profile.role && !blocked.includes(person.id));
   const activePeople = candidates.slice(0, 5);
   const interestedPeople = people.filter((person) => likes.includes(person.id) && !blocked.includes(person.id));
-  const randomCandidates = candidates.slice(0, 15);
-  const suggestion = candidates[0];
-  const randomCall = suggestion
-    ? <CallButton person={suggestion} featured randomCandidates={randomCandidates} label="Start Random Call" />
-    : null;
+  const randomCall = <CallButton person={randomCallPlaceholder} featured label="Start Random Call" />;
   return <section className="page nc-home">
     <HomeCallHero profile={profile} featuredPerson={activePeople[0]} onlineCount={activePeople.length} interestedCount={12} randomCall={randomCall} />
     <HomeActiveGirlsSection />
     <section className="nc-random-call nc-random-call-home" aria-labelledby="home-random-title">
       <div className="nc-random-mark"><Video size={28}/></div>
       <div className="nc-random-copy"><span className="nc-random-tag">✦ DISCOVER A SURPRISE CONNECTION</span><h2 id="home-random-title">Random Video Calls</h2><p>Get a surprise suggestion from active profiles and start a spontaneous video call.</p></div>
-      <div className="nc-random-selection"><div className="nc-random-avatar-stack">{activePeople.slice(0, 3).map((person) => <img key={person.id} src={person.photo} alt=""/>)}<span>+{Math.max(randomCandidates.length - 3, 0)}</span></div></div>
-      <div className="nc-random-actions">{suggestion && <CallButton person={suggestion} featured randomCandidates={randomCandidates} label="Find Random Call" />}</div>
+      <div className="nc-random-selection"><small>Verified profiles matched to your balance</small></div>
+      <div className="nc-random-actions"><CallButton person={randomCallPlaceholder} featured label="Find Random Call" /></div>
     </section>
     <HomeStories blocked={blocked} likes={likes} />
     {activePeople[0] && <HomeFeaturedProfile person={activePeople[0]} />}
@@ -986,19 +986,24 @@ function PersonPage() {
   return <section className="page"><button className="link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to explore</button><div className="profile-detail"><div className="profile-detail-photo"><img src={person.photo} alt={`Fictional profile of ${person.name}`} /></div><div className="profile-detail-info"><span className="pill"><Shield size={14} /> Fictional demo profile</span><h1>{person.name}, {person.age}</h1><p>{person.city} · {person.work} · {person.distance}</p><div className="separator" /><h3>About {person.name}</h3><p>{person.bio}</p><h3>Interests</h3><div className="chips">{person.interests.map((item) => <span className="chip" key={item}>{item}</span>)}</div><div className="profile-detail-actions">{girl ? <button className="btn pink" onClick={() => toggleInterest(person.id)}><Heart size={16} />{interestsSent.includes(person.id) ? 'Withdraw interest' : 'Send interest'}</button> : <><button className="btn pink" onClick={() => toggleLike(person.id)}><Heart size={16} />{likes.includes(person.id) ? 'Liked' : 'Like'}</button><button className="btn outline" onClick={() => navigate(`/chats/${person.id}`)}><MessageCircle size={16} /> Message</button><CallButton person={person} /></>}</div><div className="separator" /><div className="profile-detail-actions"><button className="link" onClick={() => setReportOpen(true)}><Shield size={15} /> Report</button><button className="link" onClick={() => { blockPerson(person.id); navigate('/safety'); notify('Profile blocked in this browser.'); }}><X size={15} /> Block</button></div><p className="muted-line">This is a fictional sample person. No real communication or matching occurs.</p></div></div>{reportOpen && <ModalPortal onClick={() => setReportOpen(false)}><section className="dialog-card" role="dialog" aria-modal="true" aria-labelledby="report-title" onClick={(event) => event.stopPropagation()}><button className="modal-close" aria-label="Close report" onClick={() => setReportOpen(false)}><X /></button><h2 id="report-title">Report {person.name}</h2><p>This report is saved in this browser only. No moderator is notified.</p><form className="form-stack" onSubmit={(event) => { event.preventDefault(); const form = new FormData(event.currentTarget); const reason = String(form.get('reason') ?? ''); if (!reason) return; saveReport({ id: crypto.randomUUID(), personId: person.id, reason, details: String(form.get('details') ?? '').slice(0, 500), createdAt: new Date().toISOString() }); setReportOpen(false); notify('Sample report saved locally. No moderator was notified.'); }}><Field label="Reason"><select name="reason" required defaultValue=""><option value="" disabled>Choose a reason</option><option>Inappropriate content</option><option>Spam</option><option>Something else</option></select></Field><Field label="Additional details"><textarea name="details" maxLength={500} placeholder="Add optional details" /></Field><button className="btn primary" type="submit">Save sample report</button></form></section></ModalPortal>}</section>;
 }
 
-function callRateFor(personId: number) {
+function callRateFor(person: Person) {
+  if (person.coinsPerMinute !== undefined) return person.coinsPerMinute;
+  const personId = person.id;
   return [70, 90, 120, 60, 80][personId % 5];
 }
 
 type RandomCallStep = 'type' | 'searching' | 'match';
 
-function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoins, setStep, setMode, onSearch, onClose, onConnect }: {
+function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoins, demoWalletCoins, error, loading, setStep, setMode, onSearch, onClose, onConnect }: {
   person: Person;
-  candidates?: Person[];
+  candidates: Person[];
   step: RandomCallStep;
   mode: 'video' | 'audio' | null;
   rate: number;
   walletCoins: number;
+  demoWalletCoins: number;
+  error: string | null;
+  loading: boolean;
   setStep: React.Dispatch<React.SetStateAction<RandomCallStep>>;
   setMode: React.Dispatch<React.SetStateAction<'video' | 'audio' | null>>;
   onSearch: () => void;
@@ -1007,8 +1012,7 @@ function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoin
 }) {
   const [shuffleIndex, setShuffleIndex] = useState(0);
   const [shuffleSettled, setShuffleSettled] = useState(false);
-  const shuffleCandidates = candidates ?? people.filter((item) => item.role === 'girl');
-  const reelPeople = shuffleCandidates.length ? shuffleCandidates : [person];
+  const reelPeople = candidates.length ? candidates : [person];
   const targetIndex = Math.max(0, reelPeople.findIndex((item) => item.id === person.id));
   const reelCount = reelPeople.length;
   useEffect(() => {
@@ -1041,6 +1045,7 @@ function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoin
   const callMode = mode ?? 'video';
   const CallModeIcon = callMode === 'audio' ? Phone : Video;
   const threeMinuteCost = rate * 3;
+  const canConnect = rate === 0 || (walletCoins >= rate && demoWalletCoins >= rate);
   const stageIndex = step === 'type' ? 0 : step === 'searching' ? 1 : 2;
   const stages = ['Call type', 'Shuffle', 'Connect'];
   const activeReelIndex = shuffleIndex % reelCount;
@@ -1059,10 +1064,11 @@ function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoin
     {step === 'type' && <div className="nc-random-flow-body">
       <div className="nc-random-flow-title"><h2 id="random-flow-title">How would you like to connect?</h2><p>Choose a call type, then shuffle through the profiles.</p></div>
       <div className="nc-random-type-options">
-        <button className={`nc-random-type-card ${mode === 'video' ? 'selected' : ''}`} aria-pressed={mode === 'video'} onClick={() => setMode('video')}><i><Video size={23} fill="currentColor" /></i><strong>Video call</strong><span>Face-to-face introduction</span><small>{rate} demo coins / min</small>{mode === 'video' && <Check className="nc-random-selected-check" size={17} />}</button>
-        <button className={`nc-random-type-card ${mode === 'audio' ? 'selected' : ''}`} aria-pressed={mode === 'audio'} onClick={() => setMode('audio')}><i><Phone size={22} /></i><strong>Audio call</strong><span>Voice-only conversation</span><small>{rate} demo coins / min</small>{mode === 'audio' && <Check className="nc-random-selected-check" size={17} />}</button>
+        <button className={`nc-random-type-card ${mode === 'video' ? 'selected' : ''}`} aria-pressed={mode === 'video'} onClick={() => setMode('video')}><i><Video size={23} fill="currentColor" /></i><strong>Video call</strong><span>Face-to-face introduction</span><small>Profile rate shown before connecting</small>{mode === 'video' && <Check className="nc-random-selected-check" size={17} />}</button>
+        <button className={`nc-random-type-card ${mode === 'audio' ? 'selected' : ''}`} aria-pressed={mode === 'audio'} onClick={() => setMode('audio')}><i><Phone size={22} /></i><strong>Audio call</strong><span>Voice-only conversation</span><small>Profile rate shown before connecting</small>{mode === 'audio' && <Check className="nc-random-selected-check" size={17} />}</button>
       </div>
-      <button className="nc-random-flow-primary" disabled={!mode} onClick={onSearch}>Shuffle profiles <ArrowRight size={16} /></button>
+      {error && <p role="alert" className="nc-random-insufficient-note">{error}</p>}
+      <button className="nc-random-flow-primary" disabled={!mode || loading} onClick={onSearch}>{loading ? 'Finding profiles…' : 'Shuffle profiles'} {!loading && <ArrowRight size={16} />}</button>
     </div>}
 
     {step === 'searching' && <div className="nc-random-flow-body nc-random-search-state">
@@ -1070,31 +1076,38 @@ function RandomCallFlowDialog({ person, candidates, step, mode, rate, walletCoin
       <div className={`nc-random-shuffle-stage ${shuffleSettled ? 'settled' : ''}`}>
         <div className="nc-random-shuffle-orbit" aria-hidden="true" />
         <div className="nc-random-shuffle-card side left"><img src={leftProfile.photo} alt="" /></div>
-        <div className="nc-random-shuffle-card center" key={centerProfile.id}><img src={centerProfile.photo} alt={`${centerProfile.name}, fictional profile`} /><span className="nc-random-shuffle-name">{centerProfile.name}</span><small>{shuffleSettled ? 'YOUR PICK' : 'SHUFFLING'}</small></div>
+        <div className="nc-random-shuffle-card center" key={centerProfile.id}><img src={centerProfile.photo} alt="" /><span className="nc-random-shuffle-name">{centerProfile.name}</span><small>{shuffleSettled ? 'YOUR PICK' : 'SHUFFLING'}</small></div>
         <div className="nc-random-shuffle-card side right"><img src={rightProfile.photo} alt="" /></div>
       </div>
-      <div className="nc-random-shuffle-caption"><span className={shuffleSettled ? 'done' : ''}>{shuffleSettled ? <Check size={15} /> : <i />}</span><strong>{shuffleSettled ? `${person.name} is ready` : 'Profiles are rotating'}</strong><small>{callMode === 'video' ? 'Video' : 'Audio'} call · fictional profiles</small></div>
+      <div className="nc-random-shuffle-caption"><span className={shuffleSettled ? 'done' : ''}>{shuffleSettled ? <Check size={15} /> : <i />}</span><strong>{shuffleSettled ? `${person.name} is ready` : 'Profiles are rotating'}</strong><small>{callMode === 'video' ? 'Video' : 'Audio'} call · verified profiles online</small></div>
       <button className="nc-random-flow-secondary" onClick={() => setStep('type')}>Cancel shuffle</button>
     </div>}
 
     {step === 'match' && <div className="nc-random-flow-body nc-random-match-stage">
       <div className="nc-random-flow-title"><h2 id="random-flow-title">It’s a match!</h2><p>Ready for your {callMode} call?</p></div>
-      <div className="nc-random-match-card"><img src={person.photo} alt={`Fictional profile of ${person.name}`} /><div><span className="nc-random-match-badge"><Check size={13} /> YOUR RANDOM PICK</span><h3>{person.name}, {person.age}</h3><p>{person.city} · Fictional profile</p><div className="nc-random-match-rate"><span>1 minute of {callMode} call</span><strong><Coins size={17} /> {rate} <small>coins / min</small></strong></div></div></div>
-      {walletCoins < threeMinuteCost && <div className="nc-random-recharge-warning" role="status"><AlertTriangle size={18} /><div><strong>Low balance for a 3-minute call</strong><p>You have {walletCoins} coins. Add {threeMinuteCost - walletCoins} to reach the {threeMinuteCost}-coin cost.</p></div><Link to="/wallet" onClick={onClose}><Coins size={14} /> Buy coins</Link></div>}
-      <div className="nc-random-match-actions"><button className="nc-random-flow-secondary" onClick={shuffleAgain}><Sparkles size={15} /> Shuffle again</button><button className="nc-random-flow-primary" onClick={onConnect}><CallModeIcon size={16} /> Start {callMode} call</button></div>
-      {walletCoins < rate && <p className="nc-random-insufficient-note">You need {rate} sample coins to start this call.</p>}
+      <div className="nc-random-match-card"><img src={person.photo} alt="" /><div><span className="nc-random-match-badge"><Check size={13} /> VERIFIED · ONLINE</span><h3>{person.name}, {person.age}</h3><div className="nc-random-match-rate"><span>1 minute of {callMode} call</span><strong><Coins size={17} /> {rate} <small>coins / min</small></strong></div></div></div>
+      <p className="nc-random-insufficient-note">Server wallet: {walletCoins} coins · Local preview balance: {demoWalletCoins} coins</p>
+      {walletCoins < threeMinuteCost && <div className="nc-random-recharge-warning" role="status"><AlertTriangle size={18} /><div><strong>Low server wallet balance for a 3-minute call</strong><p>Your server wallet has {walletCoins} coins. Add {threeMinuteCost - walletCoins} to reach the {threeMinuteCost}-coin cost.</p></div><Link to="/wallet" onClick={onClose}><Coins size={14} /> Buy coins</Link></div>}
+      <div className="nc-random-match-actions"><button className="nc-random-flow-secondary" disabled={loading} onClick={shuffleAgain}><Sparkles size={15} /> {loading ? 'Finding profiles…' : 'Shuffle again'}</button><button className="nc-random-flow-primary" disabled={!canConnect} onClick={onConnect}><CallModeIcon size={16} /> Start {callMode} call</button></div>
+      {!canConnect && <p className="nc-random-insufficient-note">Your local preview balance is {demoWalletCoins} coins; this profile needs {rate} coins to start the preview.</p>}
+      {walletCoins < rate && <p className="nc-random-insufficient-note">The server wallet balance has changed. Shuffle again to refresh eligible profiles.</p>}
     </div>}
-    <footer className="nc-random-flow-footer">FICTIONAL DEMO · NO LIVE USERS OR PAYMENTS CONNECTED</footer>
+    <footer className="nc-random-flow-footer">PROFILE ELIGIBILITY AND BALANCE CHECKED BY THE SERVER</footer>
   </section>;
 }
 
-function CallButton({ person, featured = false, compact = false, activeOption = false, mode = 'video', label, dock = false, randomCandidates }: { person: Person; featured?: boolean; compact?: boolean; activeOption?: boolean; mode?: 'video' | 'audio'; label?: string; dock?: boolean; randomCandidates?: Person[] }) {
+function CallButton({ person, featured = false, compact = false, activeOption = false, mode = 'video', label, dock = false }: { person: Person; featured?: boolean; compact?: boolean; activeOption?: boolean; mode?: 'video' | 'audio'; label?: string; dock?: boolean }) {
   const [open, setOpen] = useState(false); const [active, setActive] = useState(false); const [seconds, setSeconds] = useState(0);
   const [randomStep, setRandomStep] = useState<RandomCallStep>('type'); const [randomMode, setRandomMode] = useState<'video' | 'audio' | null>(null);
   const [randomPerson, setRandomPerson] = useState(person);
+  const [randomCandidates, setRandomCandidates] = useState<Person[]>([]);
+  const [randomWalletCoins, setRandomWalletCoins] = useState(0);
+  const [randomError, setRandomError] = useState<string | null>(null);
+  const [randomLoading, setRandomLoading] = useState(false);
+  const randomSearchPending = useRef(false);
   const [muted, setMuted] = useState(false); const [cameraOff, setCameraOff] = useState(false); const [flipped, setFlipped] = useState(false); const saved = useRef(false); const charged = useRef(0); const skipNextCharge = useRef(false);
   const callPerson = featured ? randomPerson : person;
-  const rate = callRateFor(callPerson.id);
+  const rate = featured && !callPerson.profileKey ? 0 : callRateFor(callPerson);
   const callMode = featured ? randomMode ?? 'video' : mode;
   const MediaIcon = callMode === 'audio' ? Phone : Video;
   const { walletCoins, spendCoins, recordCall } = useDemoStore();
@@ -1106,33 +1119,72 @@ function CallButton({ person, featured = false, compact = false, activeOption = 
     recordCall({ id: crypto.randomUUID(), personId: callPerson.id, createdAt: new Date().toISOString(), mode: callMode, durationSeconds, coinsSpent, status, direction: 'outgoing' });
   }, [callPerson.id, callMode, recordCall]);
   useEffect(() => {
-    if (!active || seconds === 0 || seconds % 60 !== 0) return;
+    if (!active || rate === 0 || seconds === 0 || seconds % 60 !== 0) return;
     if (skipNextCharge.current) { skipNextCharge.current = false; return; }
     if (spendCoins(rate)) charged.current += rate;
     else { saveSession(seconds, charged.current); setActive(false); notify('Call preview ended because the demo coin balance is low.'); }
   }, [active, seconds, rate, spendCoins, saveSession]);
   const start = useCallback(() => {
-    if (!spendCoins(rate)) return notify(`You need ${rate} sample coins for the first simulated minute.`);
+    if (rate > 0 && !spendCoins(rate)) return notify(`You need ${rate} sample coins for the first simulated minute.`);
     saved.current = false; charged.current = rate; skipNextCharge.current = false; setOpen(true); setActive(true); setSeconds(0); setMuted(false); setCameraOff(false); setFlipped(false);
   }, [rate, spendCoins]);
-  const startSearch = useCallback(() => {
-    const eligible = randomCandidates ?? people.filter((candidate) => candidate.role === 'girl');
-    const candidates = eligible.length > 1 ? eligible.filter((candidate) => candidate.id !== randomPerson.id) : eligible;
-    if (candidates.length) setRandomPerson(candidates[Math.floor(Math.random() * candidates.length)]);
-    setRandomStep('searching');
-  }, [randomCandidates, randomPerson.id]);
+  const startSearch = useCallback(async () => {
+    if (randomSearchPending.current) return;
+    randomSearchPending.current = true;
+    setRandomLoading(true);
+    setRandomError(null);
+    try {
+      const response = await customerApi.randomCallProfiles();
+      const eligible: Person[] = response.data.map((candidate, index) => ({
+        id: index + 1,
+        name: candidate.name,
+        age: candidate.age,
+        city: '',
+        bio: '',
+        work: '',
+        interests: [],
+        photo: candidate.photo,
+        role: 'girl',
+        distance: '',
+        coinsPerMinute: candidate.coins_per_minute,
+        profileKey: candidate.profile_key,
+        verified: true,
+      }));
+      if (!eligible.length) {
+        setRandomCandidates([]);
+        setRandomStep('type');
+        setRandomError('No verified online profiles fit your available coin balance.');
+        return;
+      }
+      const choices = eligible.length > 1
+        ? eligible.filter((candidate) => candidate.profileKey !== randomPerson.profileKey)
+        : eligible;
+      setRandomCandidates(eligible);
+      setRandomWalletCoins(response.wallet_coins);
+      setRandomPerson(choices[Math.floor(Math.random() * choices.length)]);
+      setRandomStep('searching');
+    } catch (error) {
+      setRandomCandidates([]);
+      setRandomStep('type');
+      setRandomError(error instanceof Error ? error.message : 'Could not load eligible profiles. Try again.');
+    } finally {
+      randomSearchPending.current = false;
+      setRandomLoading(false);
+    }
+  }, [randomPerson.profileKey]);
   function endCall() { if (active) saveSession(seconds, charged.current); setActive(false); setOpen(false); }
-  function advanceMinute() { if (!spendCoins(rate)) return notify('Not enough sample coins to simulate another minute.'); charged.current += rate; skipNextCharge.current = true; setSeconds((value) => value + 60); }
+  function advanceMinute() { if (rate > 0 && !spendCoins(rate)) return notify('Not enough sample coins to simulate another minute.'); charged.current += rate; skipNextCharge.current = true; setSeconds((value) => value + 60); }
   const activeModeClass = activeOption ? ` nc-active-contact-option nc-active-contact-option-${mode}` : '';
-  const estimatedMinutes = Math.floor(walletCoins / rate);
+  const flowWalletCoins = featured && randomCandidates.length ? randomWalletCoins : walletCoins;
+  const estimatedMinutes = rate > 0 ? Math.floor(walletCoins / rate) : 0;
   const fourMinuteCost = rate * 4;
   const canStart = walletCoins >= rate;
   return <>
-    <button className={`btn ${featured ? 'nc-home-call-button' : compact ? `nc-card-call-button${activeModeClass}` : 'primary'}${dock ? ' nc-random-dock-trigger' : ''}`} onClick={() => { if (featured) { setRandomPerson(person); setRandomStep('type'); setRandomMode(null); } setOpen(true); }} aria-label={dock ? 'Open Random Call' : activeOption ? `${mode} call with ${person.name}` : undefined}>
+    <button className={`btn ${featured ? 'nc-home-call-button' : compact ? `nc-card-call-button${activeModeClass}` : 'primary'}${dock ? ' nc-random-dock-trigger' : ''}`} onClick={() => { if (featured) { setRandomPerson(person); setRandomCandidates([]); setRandomWalletCoins(0); setRandomError(null); setRandomStep('type'); setRandomMode(null); } setOpen(true); }} aria-label={dock ? 'Open Random Call' : activeOption ? `${mode} call with ${person.name}` : undefined}>
       {dock ? <span className="nc-random-dock-icon" aria-hidden="true"><Video size={34} strokeWidth={1.8} /></span> : <MediaIcon size={16} />}{dock && <span className="nc-random-dock-badge" aria-hidden="true"><Heart size={11} fill="currentColor" /></span>}<span className={dock ? 'nc-random-dock-copy' : activeOption ? 'nc-active-action-label' : undefined}>{label ?? (featured ? 'Preview a video intro' : compact ? 'Call' : `Video intro · ${rate}/min`)}{dock && <small>Meet someone new now</small>}</span>{dock && <span className="nc-random-dock-dots" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <i key={index} />)}</span>}
     </button>
     {open && <ModalPortal onClick={() => { if (!active) setOpen(false); }}>
-      {featured && !active ? <RandomCallFlowDialog person={callPerson} candidates={randomCandidates} step={randomStep} mode={randomMode} rate={rate} walletCoins={walletCoins} setStep={setRandomStep} setMode={setRandomMode} onSearch={startSearch} onClose={endCall} onConnect={start} /> : <section className={`dialog-card ${active ? 'nc-call-active-dialog' : 'nc-call-confirmation'}`} role="dialog" aria-modal="true" aria-labelledby="callDialogTitle" onClick={(event) => event.stopPropagation()}>
+      {featured && !active ? <RandomCallFlowDialog person={callPerson} candidates={randomCandidates} step={randomStep} mode={randomMode} rate={rate} walletCoins={flowWalletCoins} demoWalletCoins={walletCoins} error={randomError} loading={randomLoading} setStep={setRandomStep} setMode={setRandomMode} onSearch={startSearch} onClose={endCall} onConnect={start} /> : <section className={`dialog-card ${active ? 'nc-call-active-dialog' : 'nc-call-confirmation'}`} role="dialog" aria-modal="true" aria-labelledby="callDialogTitle" onClick={(event) => event.stopPropagation()}>
         <button className="modal-close" onClick={endCall} aria-label="Close call dialog"><X /></button>
         {active ? <>
           <div className="nc-call-active-heading">

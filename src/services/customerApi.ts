@@ -11,6 +11,10 @@ export type ActiveGirl = {
   online: true; verified: boolean; liked: boolean;
 };
 export type ActiveGirlsResponse = { data: ActiveGirl[]; online_count: number };
+export type RandomCallProfile = {
+  profile_key: string; name: string; age: number; photo: string; coins_per_minute: number;
+};
+export type RandomCallProfilesResponse = { data: RandomCallProfile[]; wallet_coins: number };
 export type HomeProfileDetail = { data: HomeProfile; liked: boolean; interest_sent: boolean };
 export type HomeStory = {
   id: number; user_id: number; author: HomeProfile; caption: string | null;
@@ -84,6 +88,7 @@ export const customerApi = {
   preference: (enabled: boolean) => request('/notification-preferences', { method: 'PATCH', body: JSON.stringify({ notifications_enabled: enabled }) }),
   home: () => request<HomeSnapshot>('/home'),
   activeGirls: () => request<ActiveGirlsResponse>('/home/active-girls'),
+  randomCallProfiles: () => request<RandomCallProfilesResponse>('/home/random-call-profiles'),
   setActiveGirlLike: (profileKey: string, active: boolean) => request<{ active: boolean }>(`/home/active-girls/${encodeURIComponent(profileKey)}/like`, { method: 'PUT', body: JSON.stringify({ active }) }),
   homeProfile: (id: number) => request<HomeProfileDetail>(`/home/profiles/${id}`),
   setHomeInteraction: (targetId: number, type: 'like' | 'interest', active: boolean) => request<{ active: boolean }>(`/home/interactions/${targetId}`, { method: 'PUT', body: JSON.stringify({ type, active }) }),

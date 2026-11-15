@@ -1,5 +1,12 @@
 # 2026-11-14 — Low coin balance header alert
 
+## 2026-11-15 — Random Call candidate eligibility
+
+- Query candidates from the authenticated API at each shuffle, instead of using local fixture profiles.
+- Include only active, verified, online adult girls with a profile image and a per-minute rate no greater than the viewer's active coin wallet balance.
+- Return encrypted profile keys and use a private photo route that rechecks status, verification, online presence, age, and affordability.
+- Use the backend wallet balance for the shuffle quote. The call connection and minute charging remain prototype-local.
+
 - **Area:** Signed-in boy header and wallet navigation.
 - **Decision:** Show an animated wallet warning only when the demo balance is below 100 coins. Clicking it opens the supplied-style anchored popover; its CTA links to `/wallet`.
 - **Rationale:** Use the persisted demo balance and existing wallet destination without changing payment handling.

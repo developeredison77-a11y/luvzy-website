@@ -714,3 +714,19 @@ Automated unit and E2E suites were not run for this UI-only request.
 - Laravel schema check — PASS; `users.order_number` and `users.is_verified` columns exist in the configured local database.
 - `git diff --check` — PASS.
 - Automated tests — NOT RUN (not requested).
+
+## Dynamic eligible Random Call profiles (2026-11-15)
+
+- `pnpm exec tsc --noEmit` — PASS; no TypeScript errors.
+- `pnpm run lint` — PASS; no ESLint issues.
+- `pnpm run build` — PASS after final error-recovery update; 1,620 modules. Existing Vite advisory: main JS chunk 533.45 kB (>500 kB).
+- `php -l app/Http/Controllers/Api/Website/Home/HomeController.php` and `php -l routes/api.php` — PASS.
+- `vendor/bin/pint --test app/Http/Controllers/Api/Website/Home/HomeController.php routes/api.php` — PASS.
+- `git diff --check` in website and backend — PASS.
+- Independent code review — PASS after resolving balance-source, zero-rate, and duplicate-request findings.
+- Independent security review — PASS; no findings. Real connection/billing remains prototype-local.
+- Independent tester static checks — PASS in writable sandbox. Initial read-only attempt was blocked from build/Pint temp writes; no files were changed by tester.
+- Automated test suites — NOT RUN (not requested). Authenticated browser behavior — NOT RUN.
+- Final judge — PASS; no findings.
+- Final UI/browser behavior — NOT RUN; authenticated browser session unavailable. Automated test suites — NOT RUN (not requested).
+- Final shuffle-again error recovery update — TypeScript, lint, build, and diff checks PASS; independent reviewer and final judge PASS. Build advisory: main JS chunk 533.45 kB (>500 kB).

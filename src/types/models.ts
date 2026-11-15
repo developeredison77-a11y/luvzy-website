@@ -14,6 +14,9 @@ export interface Person {
   role: Role;
   distance: string;
   availableActions?: ContactAction[];
+  coinsPerMinute?: number;
+  profileKey?: string;
+  verified?: boolean;
 }
 
 export interface Profile {

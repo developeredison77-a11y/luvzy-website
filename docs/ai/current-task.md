@@ -1,3 +1,14 @@
+# Dynamic eligible profiles for Random Call (2026-11-15)
+
+- **Goal:** Replace fixture profiles in the shuffle carousel with API profiles that are verified, online, and affordable from the signed-in user's wallet.
+- **Risk level:** 3 — authenticated profile discovery, coin eligibility, and API response data.
+- **Owner provider:** Codex.
+- **Status:** Implemented. TypeScript, lint, build, PHP syntax/style, independent reviewer, security, tester, and judge PASS. Automated suites and authenticated browser behavior remain unverified.
+- **Acceptance:** Shuffle candidates come from the API; backend filters active verified online adult girls with coins_per_minute <= the viewer's active coin wallet; profile keys stay opaque; photo access rechecks current eligibility; no static shuffle-profile fixture remains.
+- **Done:** Added the authenticated backend candidate and guarded photo endpoints; connected the random-call carousel to API results and server wallet balance; removed static shuffle avatars.
+- **Pending:** Authenticated browser behavior and automated suites were not run; tests were not requested.
+- **Next action:** None for implementation; run an authenticated browser check when a session is available.
+
 # Dynamic online girls in Home (2026-11-15)
 
 - **Goal:** Replace the Active Girls section's fixture cards with online girl accounts from the users table while keeping database user IDs encrypted at the API boundary.
