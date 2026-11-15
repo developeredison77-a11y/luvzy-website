@@ -3,7 +3,7 @@ import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams } fr
 import { createPortal } from 'react-dom';
 import {
   AlertTriangle, ArrowLeft, ArrowRight, ArrowUpDown, Bell, CalendarDays, Check, ChevronDown, ChevronRight, CircleHelp, Clock3, Compass, Coins, Heart, ChartNoAxesColumn, Landmark,
-  BriefcaseBusiness, Home, Layers3, LockKeyhole, LogOut, MapPin, MessageCircle, MoreVertical, Phone, Plus, Search, Send, Settings, Shield, SlidersHorizontal, Smile, Sparkles, Star, Trash2, UsersRound, Video, Wallet, X, Zap,
+  BriefcaseBusiness, Flame, Home, Layers3, LockKeyhole, LogOut, MapPin, MessageCircle, MoreVertical, Phone, Plus, Search, Send, Settings, Shield, SlidersHorizontal, Smile, Sparkles, Star, Trash2, UsersRound, Video, Wallet, X, Zap,
 } from 'lucide-react';
 import { cities, coinPacks, interests, people, storyImages } from '../mocks/fixtures';
 import { LocalProfileRepository } from '../services/profileRepository';
@@ -588,6 +588,7 @@ function HomePage() {
   const { profile, likes, blocked, toggleLike } = useDemoStore();
   const candidates = people.filter((person) => person.role !== profile.role && !blocked.includes(person.id));
   const activePeople = candidates.slice(0, 5);
+  const interestedPeople = people.filter((person) => likes.includes(person.id) && !blocked.includes(person.id));
   const randomCandidates = candidates.slice(0, 15);
   const suggestion = candidates[0];
   const randomCall = suggestion
@@ -622,6 +623,53 @@ function HomePage() {
       <div className="nc-random-actions">{suggestion && <CallButton person={suggestion} featured randomCandidates={randomCandidates} label="Find Random Call" />}</div>
     </section>
     <HomeStories blocked={blocked} likes={likes} />
+    {activePeople[0] && <HomeFeaturedProfile person={activePeople[0]} />}
+    {interestedPeople.length > 0 && <HomeInterestedProfiles people={interestedPeople} />}
+  </section>;
+}
+
+function HomeFeaturedProfile({ person }: { person: Person }) {
+  return <section className="nc-featured-profile" aria-labelledby="home-featured-title" style={{ '--featured-photo': `url("${person.photo}")` } as React.CSSProperties}>
+    <div className="nc-featured-profile-photo"><img src={person.photo} alt={`Portrait of ${person.name}`} loading="lazy" /></div>
+    <div className="nc-featured-profile-details">
+      <span className="nc-featured-profile-label"><Star size={15} fill="currentColor" /> Featured profile</span>
+      <h2 id="home-featured-title">{person.name}, {person.age} <span aria-label="Verified profile"><Check size={15} /></span></h2>
+      <p className="nc-featured-profile-location"><MapPin size={16} /> {person.city} <i /> <span className="nc-featured-profile-online"><b /> Online now</span></p>
+      <p className="nc-featured-profile-bio">“{person.bio}”</p>
+      <div className="nc-featured-profile-interests" aria-label="Interests">{person.interests.slice(0, 3).map((interest) => <span key={interest}>{interest}</span>)}</div>
+    </div>
+    <div className="nc-featured-profile-actions">
+      <CallButton person={person} label="Video Call" />
+      <Link to={`/chats/${person.id}`}><MessageCircle size={19} /> Chat now</Link>
+    </div>
+  </section>;
+}
+
+function HomeInterestedProfiles({ people: interestedPeople }: { people: Person[] }) {
+  const featuredPeople = interestedPeople.slice(0, 3);
+  const remainingCount = interestedPeople.length - featuredPeople.length;
+  return <section className={`nc-interested${featuredPeople.length === 1 ? ' has-one' : featuredPeople.length === 2 ? ' has-two' : ''}`} aria-labelledby="home-interested-title">
+    <header className="nc-interested-header">
+      <div className="nc-interested-heading">
+        <span className="nc-interested-icon"><Heart size={23} fill="currentColor" /></span>
+        <div><h2 id="home-interested-title">People interested in you</h2><p>See who’s ready to connect.</p></div>
+        <span className="nc-interested-count"><Flame size={15} fill="currentColor" /> {interestedPeople.length} {interestedPeople.length === 1 ? 'person' : 'people'}</span>
+      </div>
+      <Link className="nc-interested-all" to="/matches">View all matches <ArrowRight size={17} /></Link>
+    </header>
+    <div className="nc-interested-grid">
+      {featuredPeople.map((person, index) => <Link className={`nc-interest-card${index === 0 ? ' is-featured' : ''}`} to={`/profile/${person.id}`} key={person.id}>
+        <img src={person.photo} alt={`Portrait of ${person.name}`} loading="lazy" />
+        <span className="nc-interest-online"><i /> Online</span>
+        <span className="nc-interest-like" aria-hidden="true"><Heart size={18} /></span>
+        <span className="nc-interest-card-copy"><strong>{person.name}, {person.age} <span aria-label="Verified">✓</span></strong><small><MapPin size={14} /> {person.city}</small></span>
+        {index === 0 && <span className="nc-interest-you">♥ Interested in you</span>}
+      </Link>)}
+      {remainingCount > 0 && <Link className="nc-interested-more" to="/matches" aria-label={`View ${remainingCount} more interested ${remainingCount === 1 ? 'person' : 'people'} in matches`}>
+        <span className="nc-interested-more-avatars">{interestedPeople.slice(3, 6).map((person) => <img key={person.id} src={person.photo} alt="" loading="lazy" />)}</span>
+        <span><strong>And {remainingCount} more {remainingCount === 1 ? 'person is' : 'people are'} interested</strong><small>View everyone in Matches <ArrowRight size={15} /></small></span>
+      </Link>}
+    </div>
   </section>;
 }
 

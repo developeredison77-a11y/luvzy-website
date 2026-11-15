@@ -577,6 +577,7 @@ Automated unit and E2E suites were not run for this UI-only request.
 - `pnpm run build` — PASS; Vite emitted the existing advisory for a JavaScript chunk above 500 kB.
 - Browser navigation to `http://localhost:5173/home` — BLOCKED for visual inspection; protected route redirected to `/login` because no authenticated backend session was available.
 - Automated tests — NOT RUN (not requested).
+- Follow-up Video Call chooser fix: `pnpm exec tsc --noEmit`, `pnpm run lint`, and `pnpm run build` — PASS. Browser interaction unverified because the browser session redirects `/home` to `/login` without authentication.
 - Git diff — UNAVAILABLE; project directory has no Git metadata.
 
 
@@ -618,3 +619,20 @@ Automated unit and E2E suites were not run for this UI-only request.
 - Browser at 390×844 — PASS: after replying to a collapsed thread, the reply is immediately visible and the toggle reports expanded. Browser local storage restored after the check.
 - `pnpm run lint` — PASS; ESLint reports no issues.
 - `pnpm run build` — PASS; 1,620 modules. Vite advisory: 526.24 kB JS chunk exceeds 500 kB.
+
+## Featured Home profile section (2026-11-15)
+
+- `pnpm exec tsc --noEmit && pnpm run lint && pnpm run build` — PASS; TypeScript and ESLint clean. Build reports 527.56 kB main JS chunk (>500 kB advisory).
+- `git diff --check` — PASS.
+- Browser visual review — BLOCKED; `/home` redirects to `/login` without an authenticated backend session. No layout measurements captured.
+- Automated tests — NOT RUN (not requested).
+
+
+## Home interested profiles panel (2026-11-15)
+
+- `pnpm exec tsc --noEmit` — PASS; no TypeScript errors.
+- `pnpm run lint` — PASS; no ESLint issues.
+- `pnpm run build` — PASS; 1,620 modules. Existing Vite advisory: 530.11 kB JS chunk exceeds 500 kB.
+- `git diff --check` — PASS.
+- Browser navigation to `http://localhost:5173/home` — BLOCKED for visual review; protected route redirected to `/login` without an authenticated session. No responsive screenshots or interaction checks captured.
+- Automated tests — NOT RUN (not requested).

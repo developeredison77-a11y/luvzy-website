@@ -385,3 +385,14 @@
 
 - Keep replies grouped under their parent and collapsed by default. Each parent exposes an accessible View replies / Hide replies toggle; new replies are added to the existing local comment store.
 - Use a neutral translucent capsule for emoji reactions, with visible labels removed and screen-reader names retained.
+
+## Featured Home profile section (2026-11-15)
+
+- Place the feature directly after Stories and use the first available active profile, its existing portrait, bio, city, interests, and existing call/chat destinations.
+- Use a wide image/details/actions banner on desktop and a single-column, touch-friendly card on phones; preserve the supplied purple/pink neon treatment.
+- Use the direct video call confirmation from the featured profile's Video Call button. Keep audio/video selection in the random-call flow only.
+
+## Home interested profiles panel (2026-11-15)
+
+- Reuse saved profile likes as the Home interest list because `/matches` already presents that same list and no separate incoming-interest dataset exists in the frontend. Apply the same blocked-profile exclusion.
+- Show up to three profiles on Home, with an overflow tile and header count linked to `/matches`; hide the entire panel when there are no profiles. Layout adapts for one or two profiles rather than reserving empty cards.

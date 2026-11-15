@@ -1,3 +1,23 @@
+# Home interested profiles panel (2026-11-15)
+
+- **Goal:** Add the supplied interested profiles section after the featured profile on Home, with safe layouts for any profile count and a link to `/matches`.
+- **Risk level:** 2 — responsive user-facing Home section.
+- **Owner provider:** Codex.
+- **Status:** Implemented. TypeScript, lint, build, and diff checks pass; browser review blocked by unauthenticated `/home` redirecting to `/login`.
+- **Acceptance:** [x] section follows featured profile; [x] one, two, three and overflow profiles adapt cleanly; [x] full-list link opens `/matches`; [x] TypeScript, lint, build, and diff checks pass. Browser visual review blocked by missing authenticated session.
+- **Done:** Derived displayed people from the same saved likes and blocked-profile filtering used by Matches. Show up to three cards and an overflow tile linked to Matches.
+- **Next action:** None; visual browser review remains unverified until an authenticated session is available.
+
+# Featured profile section after Home Stories (2026-11-15)
+
+- **Goal:** Recreate the supplied featured profile reference as a responsive Home section directly after Stories.
+- **Risk level:** 2 — multi-breakpoint, user-facing Home UI.
+- **Owner provider:** Codex.
+- **Status:** Implemented. TypeScript, lint, build, and diff whitespace checks pass. Browser visual review blocked by unauthenticated `/home` redirecting to `/login`.
+- **Acceptance:** [x] featured profile follows Stories; [x] responsive desktop/tablet/mobile layouts; [x] existing profile, video call and chat data/actions reused; [x] production build and lint pass.
+- **Done:** Added the featured profile banner and responsive styling. Its Video Call action opens the direct call cost review; random-call chooser remains on random-call CTAs.
+- **Next action:** None.
+
 # Auto-expand newly submitted story replies (2026-11-15)
 
 - **Goal:** Show a reply immediately after submission without requiring a separate expand click.
