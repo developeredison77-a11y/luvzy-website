@@ -3,14 +3,14 @@ import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams } fr
 import { createPortal } from 'react-dom';
 import {
   AlertTriangle, ArrowLeft, ArrowRight, ArrowUpDown, Bell, CalendarDays, Check, ChevronDown, ChevronRight, CircleHelp, Clock3, Compass, Coins, Heart, ChartNoAxesColumn, Landmark,
-  BriefcaseBusiness, Flame, Home, Layers3, LockKeyhole, LogOut, MapPin, MessageCircle, MoreVertical, Phone, Plus, Search, Send, Settings, Shield, SlidersHorizontal, Smile, Sparkles, Star, Trash2, UsersRound, Video, Wallet, X, Zap,
+  BriefcaseBusiness, Flame, Home, Layers3, LockKeyhole, LogOut, MapPin, MessageCircle, MoreVertical, Phone, Plus, RefreshCw, Search, Send, Settings, Shield, SlidersHorizontal, Smile, Sparkles, Star, Trash2, UsersRound, Video, Wallet, X, Zap,
 } from 'lucide-react';
 import { cities, coinPacks, interests, people, storyImages } from '../mocks/fixtures';
 import { LocalProfileRepository } from '../services/profileRepository';
 import { useDemoStore } from '../stores/demoStore';
 import type { CallRecord, ContactAction, Person, Role } from '../types/models';
 import { ageFromDateOfBirth, withdrawalEligibility } from '../utils/validation';
-import { ApiRequestError, customerApi, type Customer, type HomeProfile, type InboxNotification } from '../services/customerApi';
+import { ApiRequestError, customerApi, type ActiveGirl, type Customer, type HomeProfile, type InboxNotification } from '../services/customerApi';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import TermsOfServicePage from './TermsOfServicePage';
 import HelpFAQPage from './HelpFAQPage';
@@ -585,7 +585,7 @@ function PersonCard({ person, onClick }: { person: Person | HomeProfile; onClick
 
 
 function HomePage() {
-  const { profile, likes, blocked, toggleLike } = useDemoStore();
+  const { profile, likes, blocked } = useDemoStore();
   const candidates = people.filter((person) => person.role !== profile.role && !blocked.includes(person.id));
   const activePeople = candidates.slice(0, 5);
   const interestedPeople = people.filter((person) => likes.includes(person.id) && !blocked.includes(person.id));
@@ -596,26 +596,7 @@ function HomePage() {
     : null;
   return <section className="page nc-home">
     <HomeCallHero profile={profile} featuredPerson={activePeople[0]} onlineCount={activePeople.length} interestedCount={12} randomCall={randomCall} />
-    <section className="nc-connect-section" aria-labelledby="home-connect-title">
-      <div className="nc-connect-head">
-        <div><span className="nc-connect-kicker"><i className="nc-connect-pulse" /> NOW ONLINE · <b>LIVE</b></span><h2 id="home-connect-title">Active Girls</h2><p>Choose someone and start a one-to-one video call.</p></div>
-        <div className="nc-connect-tools"><span className="nc-connect-count"><i className="nc-activity-online" /> {activePeople.length} active now</span><Link className="nc-connect-viewall" to="/explore">View All <ChevronRight size={15} /></Link></div>
-      </div>
-      {activePeople.length ? <div className="nc-dashboard-people">{activePeople.map((person) => {
-        const actions: ContactAction[] = person.availableActions?.length ? person.availableActions : ['video'];
-        const hasVideo = actions.includes('video');
-        return <article className="nc-dashboard-person" key={person.id}>
-          <Link className="nc-dashboard-photo" to={`/profile/${person.id}`} aria-label={`View ${person.name}, ${person.age}`}><img src={person.photo} alt={`Fictional profile of ${person.name}`} loading="lazy"/><span className="nc-dashboard-online">Online</span></Link>
-          <button className="nc-dashboard-like" type="button" aria-label={`${likes.includes(person.id) ? 'Unlike' : 'Like'} ${person.name}`} aria-pressed={likes.includes(person.id)} onClick={() => toggleLike(person.id)}><Heart size={18} fill={likes.includes(person.id) ? 'currentColor' : 'none'} /></button>
-          <div className="nc-dashboard-person-info"><strong>{person.name}, {person.age} <span aria-label="Verified">✓</span></strong><small><MapPin size={13}/>{person.city}</small></div>
-          <div className={`nc-dashboard-person-actions nc-dashboard-person-actions-${actions.length}${hasVideo ? ' has-video' : ''}`}>
-            {actions.map((action) => action === 'chat'
-              ? <Link key={action} className="nc-dashboard-icon-action nc-dashboard-action-icon" to={`/chats/${person.id}`} aria-label={`Chat with ${person.name}`}><MessageCircle size={18}/><span className="nc-active-action-label">Chat</span></Link>
-              : <CallButton key={action} person={person} compact activeOption mode={action} label={action === 'video' ? 'Video Call' : 'Audio'} />)}
-          </div>
-        </article>;
-      })}</div> : <p className="nc-home-empty">No profiles are available yet. Check back soon.</p>}
-    </section>
+    <HomeActiveGirlsSection />
     <section className="nc-random-call nc-random-call-home" aria-labelledby="home-random-title">
       <div className="nc-random-mark"><Video size={28}/></div>
       <div className="nc-random-copy"><span className="nc-random-tag">✦ DISCOVER A SURPRISE CONNECTION</span><h2 id="home-random-title">Random Video Calls</h2><p>Get a surprise suggestion from active profiles and start a spontaneous video call.</p></div>
@@ -625,6 +606,64 @@ function HomePage() {
     <HomeStories blocked={blocked} likes={likes} />
     {activePeople[0] && <HomeFeaturedProfile person={activePeople[0]} />}
     {interestedPeople.length > 0 && <HomeInterestedProfiles people={interestedPeople} />}
+  </section>;
+}
+
+function HomeActiveGirlsSection() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeGirls, setActiveGirls] = useState<ActiveGirl[]>([]);
+  const [onlineCount, setOnlineCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [pendingLikes, setPendingLikes] = useState<string[]>([]);
+  const loadActiveGirls = useCallback(async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const result = await customerApi.activeGirls();
+      setActiveGirls(result.data.filter((girl) => girl.online));
+      setOnlineCount(result.online_count);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+  useEffect(() => { void loadActiveGirls(); }, [loadActiveGirls]);
+
+  const toggleLike = async (girl: ActiveGirl) => {
+    setPendingLikes((pending) => [...pending, girl.profile_key]);
+    try {
+      await customerApi.setActiveGirlLike(girl.profile_key, !girl.liked);
+      setActiveGirls((girls) => girls.map((item) => item.profile_key === girl.profile_key ? { ...item, liked: !girl.liked } : item));
+    } catch {
+      notify('Could not update this like. Please try again.');
+    } finally {
+      setPendingLikes((pending) => pending.filter((key) => key !== girl.profile_key));
+    }
+  };
+
+  const scrollGirls = (direction: -1 | 1) => {
+    const track = trackRef.current;
+    if (track) track.scrollBy({ left: direction * track.clientWidth * 0.85, behavior: 'smooth' });
+  };
+
+  return <section className="nc-connect-section" aria-labelledby="home-connect-title">
+    <div className="nc-connect-head">
+      <div><span className="nc-connect-kicker"><i className="nc-connect-pulse" /> NOW ONLINE · <b>LIVE</b></span><h2 id="home-connect-title">Active Girls</h2><p>Discover adult members who are online now.</p></div>
+      <div className="nc-connect-tools"><span className={`nc-connect-count${onlineCount === 0 ? ' is-empty' : ''}`}><i className="nc-activity-online" /> {onlineCount} active now</span>{activeGirls.length > 1 && <div className="nc-active-scroll-controls" aria-label="Scroll active profiles"><button type="button" aria-label="Show previous profiles" onClick={() => scrollGirls(-1)}><ArrowLeft size={17}/></button><button type="button" aria-label="Show more profiles" onClick={() => scrollGirls(1)}><ArrowRight size={17}/></button></div>}</div>
+    </div>
+    {loading ? <p className="nc-home-empty" role="status">Loading girls who are online…</p> : error ? <div className="nc-home-empty" role="alert"><p>Active profiles could not be loaded.</p><button className="btn outline" type="button" onClick={() => void loadActiveGirls()}>Try again</button></div> : activeGirls.length ? <div className="nc-active-carousel"><div id="active-girls-track" className="nc-dashboard-people nc-active-track" ref={trackRef} role="region" aria-label="Online girl profiles" tabIndex={0}>{activeGirls.map((girl) => {
+      return <article className="nc-dashboard-person" key={girl.profile_key}>
+        <div className="nc-dashboard-photo" aria-label={`${girl.name}, ${girl.age}`}>{girl.photo && <img src={girl.photo} alt={`Profile photo of ${girl.name}`} loading="lazy"/>}<span className="nc-dashboard-online">Online</span></div>
+        <button className="nc-dashboard-like" type="button" aria-label={`${girl.liked ? 'Unlike' : 'Like'} ${girl.name}`} aria-pressed={girl.liked} disabled={pendingLikes.includes(girl.profile_key)} onClick={() => void toggleLike(girl)}><Heart size={18} fill={girl.liked ? 'currentColor' : 'none'} /></button>
+        <div className="nc-dashboard-person-info"><strong>{girl.name}, {girl.age} {girl.verified && <span aria-label="Verified">✓</span>}</strong></div>
+      </article>;
+    })}</div></div> : <div className="nc-active-empty" aria-live="polite">
+      <div className="nc-active-empty-art" aria-hidden="true"><span className="nc-active-empty-glow"/><span className="nc-active-empty-icon"><UsersRound size={28}/></span><i className="nc-active-empty-dot"/></div>
+      <div className="nc-active-empty-copy"><span className="nc-active-empty-kicker">A QUIET MOMENT</span><h3>No eligible profiles are online</h3><p>Adult members appear here when they’re online.</p></div>
+      <button className="nc-active-empty-refresh" type="button" onClick={() => void loadActiveGirls()}><RefreshCw size={16}/> Check again</button>
+    </div>}
   </section>;
 }
 
@@ -775,7 +814,7 @@ function HomeStoryViewer({ person, storyIndex, storyCount, onClose, onPrevious, 
 
 function HomeCallHero({ profile, featuredPerson, onlineCount, interestedCount, randomCall }: { profile: { name: string }; featuredPerson?: Person; onlineCount: number; interestedCount: number; randomCall: React.ReactNode }) {
   return <section className="nc-home-hero" aria-labelledby="home-welcome-title">
-    <div className="nc-home-hero-copy"><span className="nc-home-hero-eyebrow">YOUR VIDEO DATING COMMUNITY</span><h1 id="home-welcome-title">Good to see you, <em>{profile.name.split(' ')[0]}!</em> 👋</h1><p>Meet new people, start a video call, chat, and make real connections.</p><div className="nc-home-hero-actions">{randomCall}<Link className="nc-home-discover-button" to="/explore"><Compass size={18} /> Discover People</Link></div></div>
+    <div className="nc-home-hero-copy"><span className="nc-home-hero-eyebrow">YOUR VIDEO DATING COMMUNITY</span><h1 id="home-welcome-title">Good to see you, <em>{profile.name.split(' ')[0]}!</em> </h1><p>Meet new people, start a video call, chat, and make real connections.</p><div className="nc-home-hero-actions">{randomCall}<Link className="nc-home-discover-button" to="/explore"><Compass size={18} /> Discover People</Link></div></div>
     <div className="nc-home-hero-visual" aria-label="Community profile preview"><div className="nc-home-hero-orbit" /><Heart className="nc-home-hero-heart" size={36} /><div className="nc-home-hero-portrait nc-home-hero-portrait-back" /> <div className="nc-home-hero-portrait nc-home-hero-portrait-main">{featuredPerson?.photo && <img src={featuredPerson.photo} alt={featuredPerson.name} />}<span><UsersRound size={17} /><i /></span></div></div>
     <aside className="nc-today-activity" aria-label="Community activity"><h2><Zap size={17} /> Today’s Activity</h2><Link to="/explore"><i className="nc-activity-online" /><span><strong>{onlineCount} Girls Online</strong></span><ChevronRight size={16} /></Link><Link to="/matches"><Heart size={17} /><span><strong>{interestedCount} New Matches</strong></span><ChevronRight size={16} /></Link><Link to="/chats"><MessageCircle size={17} /><span><strong>3 Unread Chats</strong></span><ChevronRight size={16} /></Link><small>Activity from your community</small></aside>
   </section>;
@@ -1175,7 +1214,7 @@ function ChatsPage() {
   const filteredChats = chats.filter(({ person, thread }) => person.name.toLowerCase().includes(query.toLowerCase()) && (filter !== 'Unread' || thread.length > 0) && (filter !== 'Online' || person.id !== people[2].id));
   const selected = chats.find(({ person }) => person.id === selectedId);
   const previewMessages = selected ? selected.thread.length ? selected.thread.map((message) => ({ text: message.text, mine: message.mine, time: '10:24 PM' })) : selected.person.id === people[0].id ? [
-    { text: 'Hey there! 👋', mine: false, time: '10:08 PM' },
+    { text: 'Hey there!', mine: false, time: '10:08 PM' },
     { text: `Hi ${selected.person.name}! How’s your day going?`, mine: true, time: '10:12 PM' },
     { text: 'Pretty good! Just unwinding after a busy day. What about you?', mine: false, time: '10:18 PM' },
     { text: 'Same here! Would love to know more about you. 😊', mine: true, time: '10:24 PM' },

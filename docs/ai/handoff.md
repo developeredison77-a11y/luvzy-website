@@ -1,19 +1,18 @@
-# Handoff — Home correction awaiting data-source choice (2026-11-15)
+# Handoff
 
-- Outgoing provider: Codex.
-- Working tree: `/Users/edisonkpaul/Documents/Own/luvzy/luvzy-website`.
-- Branch / HEAD / Git diff: unavailable; this directory has no Git metadata.
-- Status: Incomplete. User clarification is pending because “previous static data” conflicts with the original requirement to use backend data.
+- **Outgoing provider:** Codex
+- **Written at:** 2026-11-15T11:05:30Z
+- **Working tree:** `/Users/edisonkpaul/Documents/Own/luvzy/luvzy-website`; backend sibling `/Users/edisonkpaul/Documents/Own/luvzy/luvzy-backend`
+- **Kind:** Active Girls filtering and ordering updated
 
-## Safe checkpoint
+## Current state
 
-- Current `src/app/App.tsx:601` HomePage renders only the welcome/activity hero and fetches `/home`. Shared file mtime is 13:02 local, after an API-backed implementation had passed frontend/browser checks. Preserve the current shared source until the user chooses the intended data source.
-- Independent reviewer and security reviewer inspected the current hero-only source. Independent tester reports `pnpm test` failed 3 of 26 tests, type-check/lint/build passed, and Playwright executed no tests (6 skipped).
-- Earlier API-backed version passed 26 frontend tests, type-check, lint, six Playwright tests, and build, but those results do not apply to the current source state.
-- Existing dynamic API methods and CSS for the omitted sections remain in the project. There is no live authenticated API browser result.
+Active Girls returns all eligible records, in a section-scoped horizontal track. The backend now filters target users to `is_verified = true`, orders by `order_number` ascending with `id` as stable tie-break, and reports the admin verification flag. Target status/presence/adult-DOB filters remain. Viewer must have an active account; city isn't checked or returned. Encrypted opaque profile keys remain.
 
-## Next actions
+## Verification
 
-1. Get the user’s choice: restore the former static sample data and sections, or preserve the sections with backend-only data as originally requested.
-2. Make only the selected Home change; keep the existing section structure.
-3. Rerun unit, type, lint, build, and browser checks against the resulting current source. Update `docs/ai/current-task.md`, `decisions.md`, and `verification.md`.
+PHP syntax, Pint, local schema column check, and diff whitespace checks PASS. Tests and authenticated browser interaction were not run.
+
+## Prior dirty work
+
+Preserve all earlier uncommitted files, including ongoing admin user ordering/verification work, website UI changes, and continuity records.

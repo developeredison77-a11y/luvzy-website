@@ -30,6 +30,32 @@
 
 # Verification log
 
+## Dynamic Home Active Girls (2026-11-15)
+
+- `pnpm exec tsc --noEmit` — PASS; no TypeScript errors.
+- `pnpm run lint` — PASS; no ESLint issues.
+- `pnpm run build` — SUPERSEDED 2026-11-15T09:40Z by Codex: Active Girls was narrowed and its local demo call action removed after review; final build below applies to the final source. Earlier result: PASS; 1,620 modules; Vite advisory: main JS chunk is 530.96 kB (>500 kB).
+- `php -l ../luvzy-backend/app/Http/Controllers/Api/Website/Home/HomeController.php` and `php -l ../luvzy-backend/routes/api.php` — PASS.
+- `php ../luvzy-backend/vendor/bin/pint --test ...` — PASS; Pint reports passed for the controller and routes.
+- `php ../luvzy-backend/artisan route:list --path=home` — PASS; new list, like, and photo routes are registered inside the authenticated Home route group.
+- `git diff --check` — PASS.
+- Manual browser navigation to `http://localhost:5173/home` — SUPERSEDED 2026-11-15T09:52Z by Codex: started Vite; the route now loads and redirects to `/login` because `/api/v1/auth/me` returns 401 without a signed-in session. Earlier result: BLOCKED; browser reported `net::ERR_CONNECTION_REFUSED` while Vite was stopped.
+- Automated tests — NOT RUN; session instruction prohibits adding/running tests unless explicitly requested.
+- Final source verification after review fix: `pnpm exec tsc --noEmit && pnpm run lint` — PASS; no errors or ESLint issues. `pnpm run build` — PASS; 1,620 modules; Vite advisory: main JS chunk is 530.50 kB (>500 kB).
+- Final PHP verification: PHP syntax for controller and routes — PASS; `vendor/bin/pint --test` — PASS; `php artisan route:list --path=home` — PASS; `git diff --check` — PASS.
+- Independent reviewer — PASS; prior medium fixture-photo and demo-call mismatch finding fixed; final review reports no findings.
+- Independent security review — PASS; no exploitable finding.
+- Independent judge — NEEDS-FIX; finding: profile, video, and chat entry points were removed. The prior actions route to fixture-backed profiles and local-only call/chat demos; restoring safe, real actions requires a broader scope decision. No separate tester run because tests were not authorized.
+- After starting `pnpm run dev -- --host 0.0.0.0`, browser navigation to `http://localhost:5173/home` — route served and redirected to `/login`; `/api/v1/auth/me` returned 401. Vite remains running for the user.
+- Active Girls empty-state update: `pnpm exec tsc --noEmit` — PASS; `pnpm run lint` — PASS; `pnpm run build` — PASS, 1,620 modules. Existing Vite advisory: main JS chunk is 531.59 kB (>500 kB).
+- `git diff --check` — PASS.
+- Browser visual review of the empty state — BLOCKED; current browser session redirects to `/login` because `/api/v1/auth/me` returns 401. Vite is running at `http://localhost:5173/`.
+- Read-only local DB aggregate via `php ../luvzy-backend/artisan tinker --execute=...` — 7 active online girl accounts; 7 have no DOB; 0 are currently adult-eligible. No member rows or DOB values were read or printed. This explains why the endpoint returns an empty list; no age eligibility check was removed.
+- `pnpm exec tsc --noEmit` — PASS; no TypeScript errors after the eligibility explanation copy update.
+- `pnpm run lint` — PASS; no ESLint issues.
+- `pnpm run build` — PASS; 1,620 modules. Vite advisory: main JS chunk is 531.61 kB (>500 kB).
+- `git diff --check` — PASS.
+
 ## Home layout preservation follow-up (2026-11-15)
 
 - `pnpm test` — SUPERSEDED 2026-11-15T07:36Z by Codex: later source state no longer renders Home sections; current independent rerun reports three Home failures. Original result: PASS; 4 files / 26 tests. Home tests confirm API profile content, restored sections, persisted actions, and no fixture fallback.
@@ -635,4 +661,56 @@ Automated unit and E2E suites were not run for this UI-only request.
 - `pnpm run build` — PASS; 1,620 modules. Existing Vite advisory: 530.11 kB JS chunk exceeds 500 kB.
 - `git diff --check` — PASS.
 - Browser navigation to `http://localhost:5173/home` — BLOCKED for visual review; protected route redirected to `/login` without an authenticated session. No responsive screenshots or interaction checks captured.
+- Automated tests — NOT RUN (not requested).
+
+## Active Girls without city requirements (2026-11-15T10:28Z)
+
+- `pnpm exec tsc --noEmit` — PASS; no TypeScript errors.
+- `pnpm run lint` — PASS; ESLint clean.
+- `pnpm run build` — PASS; 1,620 modules; existing 531.52 kB JavaScript chunk advisory remains.
+- `php -l app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `vendor/bin/pint --test app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `git diff --check` — PASS.
+- Automated tests — NOT RUN (not requested). Authenticated browser review — NOT RUN; session unavailable.
+
+## Active Girls remaining empty result (2026-11-15T10:31Z)
+
+- Laravel Tinker aggregate against the local users/profiles tables — active online girls: 8; adult active online girls: 3; active boys: 2; adult active boys: 0. No user rows or DOB values printed.
+- `curl -sS -i -H 'Accept: application/json' http://localhost:8002/api/v1/home/active-girls` — HTTP 401 `Unauthenticated.`; no authenticated response available in this shell.
+- Browser tab inspection — current web session is at `/login`; authenticated `/home` behavior is not verified.
+
+## Active Girls viewer eligibility change (2026-11-15T10:37Z)
+
+- `php -l app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `vendor/bin/pint --test app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `git diff --check` — PASS.
+- Independent reviewer — PASS; list/like/photo viewer gates and target consistency verified from source.
+- Independent security review — PASS; Sanctum auth remains, active-only viewer status is enforced, targets remain active/online/adult, opaque keys remain; no findings.
+- Automated tests — NOT RUN (not requested; session instruction prohibits running tests unless asked). Authenticated browser interaction — NOT RUN; no signed-in browser session.
+- Independent judge — PASS; requested active-only viewer eligibility and retained target restrictions, Sanctum, and opaque keys confirmed.
+
+## Active Girls scrolling and full online list (2026-11-15T10:50Z)
+
+- `pnpm exec tsc --noEmit` — PASS.
+- `pnpm run lint` — PASS.
+- `pnpm run build` — PASS; 1,620 modules. Existing main JS chunk advisory: 532.13 kB (>500 kB).
+- `php -l app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `vendor/bin/pint --test app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `git diff --check` — PASS.
+- Browser interaction — NOT RUN; current browser is unauthenticated. Automated tests — NOT RUN (not requested).
+
+## Active Girls no-slide follow-up (2026-11-15T10:55Z)
+
+- Root cause: legacy `.nc-active-carousel:not(.has-overflow) .nc-active-track` forced the cards to shrink-to-fit, overriding the intended overflow track. Removed that conflicting rule; the new scoped grid now retains fixed responsive card widths and horizontal overflow.
+- `pnpm run lint` — PASS.
+- `pnpm run build` — PASS; 1,620 modules. Existing main JS chunk advisory: 532.13 kB (>500 kB).
+- `git diff --check` — PASS.
+- Browser interaction — NOT RUN; no authenticated session in the local browser.
+
+## Active Girls verification filter and ordering (2026-11-15T11:05Z)
+
+- `php -l app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- `vendor/bin/pint --test app/Http/Controllers/Api/Website/Home/HomeController.php` — PASS.
+- Laravel schema check — PASS; `users.order_number` and `users.is_verified` columns exist in the configured local database.
+- `git diff --check` — PASS.
 - Automated tests — NOT RUN (not requested).

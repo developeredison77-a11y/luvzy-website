@@ -16,6 +16,30 @@
 
 # Decisions
 
+## 2026-11-15 — Active Girls empty state
+
+- **Area:** Website `/home` Active Girls section.
+- **Decision:** When the online list is empty, show a compact illustrated empty state with explanatory copy and a refresh action; style a zero active count neutrally.
+- **Rationale:** Preserve the section's visual hierarchy and provide a useful next action without displaying fixture profiles.
+- **Approved by:** User request and screenshot reference.
+- **Recorded by:** Codex.
+
+## 2026-11-15 — Keep adult eligibility for Active Girls discovery
+
+- **Area:** Website `/home` Active Girls API.
+- **Decision:** Keep the adult date-of-birth and usable-location filters for profiles shown in discovery, even when admin presence is manually set to online. Explain the eligibility requirement in the empty state.
+- **Rationale:** Admin-managed online presence is separate from age eligibility; the local aggregate showed online girl accounts with no date of birth, so their adult status cannot be established.
+- **Approved by:** Existing discovery eligibility policy; user request to use admin-managed online presence.
+- **Recorded by:** Codex.
+
+## 2026-11-15 — Home Active Girls uses opaque profile keys
+
+- **Area:** Website `/home` Active Girls section.
+- **Decision:** Use a dedicated authenticated backend query for active, adult, online girl accounts. Return a Laravel-encrypted URL-safe profile key instead of the database user ID, and resolve that key only on the server for likes and private photo delivery. Replace fixture cards in this section only.
+- **Rationale:** Keep the card list backed by current users-table presence while avoiding plaintext database IDs in its frontend payload and URLs.
+- **Approved by:** User request.
+- **Recorded by:** Codex.
+
 ## 2026-11-15 — Preserve Home section structure during data integration
 
 - **Area:** Website `/home` presentation.
@@ -396,3 +420,24 @@
 
 - Reuse saved profile likes as the Home interest list because `/matches` already presents that same list and no separate incoming-interest dataset exists in the frontend. Apply the same blocked-profile exclusion.
 - Show up to three profiles on Home, with an overflow tile and header count linked to `/matches`; hide the entire panel when there are no profiles. Layout adapts for one or two profiles rather than reserving empty cards.
+
+## Active Girls city eligibility (2026-11-15T10:28Z)
+
+- Remove city requirements from the Active Girls list, like, and photo endpoints, including the viewer gate. Keep active account, adult DOB, online presence, and boy-viewer requirements.
+- Do not query or serialize city for this section; city is optional profile data and must not block display.
+- Keep shared discovery eligibility helpers unchanged for other endpoints.
+
+## Active Girls viewer eligibility clarification (2026-11-15T10:37Z)
+
+- Per the user's explicit correction, Active Girls list, like, and photo endpoints require only an authenticated viewer whose account status is `active`; do not gate the viewer by gender, online presence, or DOB.
+- Keep target profiles restricted to active, online girl accounts with adult DOB. City remains optional and is not queried or returned.
+
+## Active Girls horizontal overflow (2026-11-15T10:50Z)
+
+- Remove the five-profile limit from the authenticated Active Girls list so the API returns all eligible online girls and count remains total eligible online profiles.
+- Keep horizontal overflow, scroll snap, touch/keyboard support, and scoped previous/next controls inside Active Girls. Do not alter other Home sections.
+
+## Active Girls verification and ordering (2026-11-15T11:05Z)
+
+- Filter Active Girls targets with `users.is_verified = true` and order by `users.order_number` ascending, then `users.id` for deterministic ties, matching the admin users list.
+- Set the response `verified` flag from `users.is_verified`, the same verification property used for inclusion.

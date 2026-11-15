@@ -1,3 +1,16 @@
+# Dynamic online girls in Home (2026-11-15)
+
+- **Goal:** Replace the Active Girls section's fixture cards with online girl accounts from the users table while keeping database user IDs encrypted at the API boundary.
+- **Risk level:** 3 — authenticated member discovery data and public API identifiers.
+- **Owner provider:** Codex.
+- **Status:** Active Girls returns all eligible online girls, scrolls within its own section, and now filters to `users.is_verified = true`, ordered by `users.order_number` ascending with `users.id` tie-break. Viewer requires active account only; target girls remain active, online, and adult by DOB. Backend syntax/style, DB column check, and diff checks pass. Browser interaction and tests are unverified.
+- **Acceptance:** Active Girls loads only online adult girl profiles from the database; no fixture list in that section; API returns no raw user ID; photos and likes use opaque profile keys; other Home sections remain unchanged.
+- **Done:** Added the `/home/active-girls` API and opaque-key like/photo endpoints; replaced only the Active Girls cards with API data and loading/error/empty states.
+- **Done:** Empty state describes adult/online eligibility only; city text was removed from the Active Girls payload and cards.
+- **Done:** TypeScript, ESLint, production build, PHP syntax, Pint, and `git diff --check` pass after removing city eligibility and adding verified/order filtering.
+- **Pending:** Automated tests and authenticated browser interaction were not run. Profile/video/chat scope remains undecided from the earlier review.
+- **Next action:** Verify horizontal scrolling with an authenticated account and more than five eligible profiles.
+
 # Home interested profiles panel (2026-11-15)
 
 - **Goal:** Add the supplied interested profiles section after the featured profile on Home, with safe layouts for any profile count and a link to `/matches`.
