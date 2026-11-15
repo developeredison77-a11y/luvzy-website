@@ -599,3 +599,22 @@ Automated unit and E2E suites were not run for this UI-only request.
 - Browser corrected interaction pass — PASS with `/api/v1/auth/me` mocked for sign-in: story image loaded; Love reaction selected; comment and nested reply rendered; mobile tap advanced Ananya to Mira; avatar measured circular at 68×68px. Original local demo storage restored and page reloaded afterward.
 - Backend was not running; unrelated `/api/v1/notifications` request returned 401. Automated test suite — NOT RUN (not requested).
 - Final browser focus and media check — PASS: story opens with focus on Close story; comments open with focus on the comment input; story image resolves at 1200×1800; desktop avatar measured 96×96px and mobile 68×68px.
+
+## Instagram-style reaction controls (2026-11-15T08:42Z)
+
+- `pnpm run lint` — PASS; ESLint reports no issues.
+- `pnpm run build` — PASS; 1,620 modules. Vite advisory: 525.41 kB JS chunk exceeds 500 kB.
+- Mobile browser at 390×844 — PASS; six visible emoji-only reaction buttons with accessible names, no reaction heading, full-screen story presentation, caption ends above the reaction tray, reaction toggles and restores, comment sheet opens. Browser demo state was restored.
+
+## Collapsible story replies and reaction tray (2026-11-15T08:48Z)
+
+- Initial browser interaction — FAIL: opening a comment with replies triggered `ReferenceError: React is not defined` in the recursive comment renderer. Fixed by importing `Fragment` explicitly.
+- `pnpm run lint` — PASS; ESLint reports no issues.
+- `pnpm run build` — PASS; 1,620 modules. Vite advisory: 526.21 kB JS chunk exceeds 500 kB.
+- Mobile browser at 390×844 — PASS after fix: new replies start hidden; View 1 reply reveals the reply and sets `aria-expanded=true`; Hide replies collapses it. Reaction tray is a 334×56px neutral glass pill with emoji-only visible controls. Local test comments/replies were restored out of storage.
+
+## Auto-expand newly submitted story replies (2026-11-15T08:56Z)
+
+- Browser at 390×844 — PASS: after replying to a collapsed thread, the reply is immediately visible and the toggle reports expanded. Browser local storage restored after the check.
+- `pnpm run lint` — PASS; ESLint reports no issues.
+- `pnpm run build` — PASS; 1,620 modules. Vite advisory: 526.24 kB JS chunk exceeds 500 kB.

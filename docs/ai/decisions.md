@@ -376,3 +376,12 @@
 - Use the existing local `storyImages`, `storyReactions`, and `storyComments` state for the Home Stories demo viewer; do not add a backend dependency or change the persisted model.
 - Each avatar opens one sample story; reaction selection, comments, reply entries, and story navigation remain local. Reply entries keep their marker in persisted strings and render as nested replies.
 - Lock ring and image width/height and `box-sizing` so avatar circles remain round at every breakpoint.
+
+## Instagram-style Home story controls (2026-11-15T08:42Z)
+
+- Keep emoji reactions visually unlabeled while retaining `aria-label` text; use the existing full-screen story CSS, floating reaction tray, and message-style comment action.
+
+## Collapsible story reply threads (2026-11-15T08:48Z)
+
+- Keep replies grouped under their parent and collapsed by default. Each parent exposes an accessible View replies / Hide replies toggle; new replies are added to the existing local comment store.
+- Use a neutral translucent capsule for emoji reactions, with visible labels removed and screen-reader names retained.

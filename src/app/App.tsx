@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import {
@@ -665,7 +665,19 @@ function HomeStoryViewer({ person, storyIndex, storyCount, onClose, onPrevious, 
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [replyTo, setReplyTo] = useState<string | null>(null);
+  const [expandedThreads, setExpandedThreads] = useState<Record<string, boolean>>({});
   const comments = storyComments[person.id] ?? [];
+  const commentBodies = new Map(comments.map((comment) => [comment, comment]));
+  const repliesByParent = new Map<string, string[]>();
+  for (const comment of comments) {
+    if (!comment.startsWith('↳ ')) continue;
+    const content = comment.slice(2);
+    const parent = comments.filter((candidate) => candidate !== comment).sort((left, right) => right.length - left.length).find((candidate) => content.startsWith(`${candidate}: `));
+    if (!parent) continue;
+    commentBodies.set(comment, content.slice(parent.length + 2));
+    repliesByParent.set(parent, [...(repliesByParent.get(parent) ?? []), comment]);
+  }
+  const rootComments = comments.filter((comment) => !comment.startsWith('↳ '));
   useDialogAccessibility(true, onClose);
   useEffect(() => {
     document.body.classList.add('nc-story-open');
@@ -676,30 +688,36 @@ function HomeStoryViewer({ person, storyIndex, storyCount, onClose, onPrevious, 
     const text = commentText.trim();
     if (!text) return;
     addStoryComment(person.id, replyTo ? `↳ ${replyTo}: ${text}` : text);
+    if (replyTo) setExpandedThreads((current) => ({ ...current, [`${person.id}:${replyTo}`]: true }));
     setCommentText('');
     setReplyTo(null);
   };
+  const renderComment = (comment: string, depth = 0): React.ReactNode => {
+    const replies = repliesByParent.get(comment) ?? [];
+    const threadKey = `${person.id}:${comment}`;
+    const expanded = Boolean(expandedThreads[threadKey]);
+    const threadId = `story-replies-${person.id}-${comments.indexOf(comment)}`;
+    return <Fragment key={comment}>
+      <article className={`nc-story-comment${depth > 0 ? ' nc-story-comment-reply' : ''}`}><span className="nc-story-comment-avatar">{profile.name.slice(0, 1).toUpperCase()}</span><div className="nc-story-comment-content"><strong>{profile.name}</strong><p>{commentBodies.get(comment) ?? comment}</p><div className="nc-story-comment-ops">{depth === 0 && <button type="button" onClick={() => setReplyTo(comment)}>Reply</button>}{replies.length > 0 && <button className={`nc-story-thread-toggle${expanded ? ' expanded' : ''}`} type="button" aria-expanded={expanded} aria-controls={threadId} onClick={() => setExpandedThreads((current) => ({ ...current, [threadKey]: !current[threadKey] }))}><ChevronDown size={13} />{expanded ? 'Hide replies' : `View ${replies.length} ${replies.length === 1 ? 'reply' : 'replies'}`}</button>}<span className="nc-story-comment-meta">Just now</span></div></div></article>
+      {replies.length > 0 && <div className="nc-story-comment-children" id={threadId} hidden={!expanded}>{replies.map((reply) => renderComment(reply, depth + 1))}</div>}
+    </Fragment>;
+  };
 
   return createPortal(<div className="nc-story-overlay" onClick={onClose}>
-    <section className="nc-story-shell" role="dialog" aria-modal="true" aria-label={`${person.name}'s story`} onClick={(event) => event.stopPropagation()}>
+    <section className="nc-story-shell nc-story-shell-fullscreen" role="dialog" aria-modal="true" aria-label={`${person.name}'s story`} onClick={(event) => event.stopPropagation()}>
       <div className="nc-story-progress" aria-label={`Story ${storyIndex + 1} of ${storyCount}`}><span className="nc-story-track"><span style={{ width: '100%' }} /></span></div>
       <header className="nc-story-header"><img className="nc-story-author-photo" src={person.photo} alt="" /><span className="nc-story-author"><strong>{person.name}</strong><small>{person.city} · Just now</small></span><button type="button" aria-label="Close story" onClick={onClose}><X /></button></header>
       <div className="nc-story-visual"><img className="nc-story-media" src={storyImages[storyIndex % storyImages.length]} alt={`${person.name}'s story`} /><button className="nc-story-tap prev" type="button" aria-label="Previous story" onClick={onPrevious} /><button className="nc-story-tap next" type="button" aria-label="Next story" onClick={onNext} /></div>
       <div className="nc-story-caption"><span>STORY · {person.city.toUpperCase()}</span><h3>{person.bio}</h3></div>
       <footer className="nc-story-footer">
-        <p className="nc-story-reaction-label">Send a reaction</p>
-        <div className="nc-story-reactions" aria-label="Story reactions">{[['❤️', 'Love'], ['🔥', 'Fire'], ['😂', 'Funny'], ['😮', 'Wow']].map(([emoji, label]) => <button className={`nc-story-react${storyReactions[person.id] === emoji ? ' selected' : ''}`} type="button" key={emoji} aria-label={`${label} reaction`} aria-pressed={storyReactions[person.id] === emoji} onClick={() => toggleStoryReaction(person.id, emoji)}><span className="emoji">{emoji}</span><span className="count">{storyReactions[person.id] === emoji ? 'Sent' : label}</span></button>)}</div>
-        <div className="nc-story-footer-actions"><button className="nc-story-comment-open" type="button" onClick={() => setCommentsOpen(true)}>Write a comment…</button><button className="nc-story-comment-total" type="button" aria-label={`Open ${comments.length} comments`} onClick={() => setCommentsOpen(true)}><MessageCircle size={15} /> {comments.length}</button></div>
+        <div className="nc-story-reactions" aria-label="Story reactions">{[['❤️', 'Love'], ['😂', 'Laugh'], ['😮', 'Surprise'], ['😍', 'Adore'], ['😢', 'Sad'], ['🔥', 'Fire']].map(([emoji, label]) => <button className={`nc-story-react${storyReactions[person.id] === emoji ? ' selected' : ''}`} type="button" key={emoji} aria-label={`React with ${label}`} aria-pressed={storyReactions[person.id] === emoji} onClick={() => toggleStoryReaction(person.id, emoji)}><span className="emoji">{emoji}</span></button>)}</div>
+        <div className="nc-story-footer-actions nc-story-instagram-actions"><button className="nc-story-comment-open" type="button" onClick={() => setCommentsOpen(true)}>Send a comment…</button><button className="nc-story-icon-action" type="button" aria-label={`Open ${comments.length} comments`} onClick={() => setCommentsOpen(true)}><MessageCircle size={24} />{comments.length > 0 && <span className="nc-story-small-count">{comments.length}</span>}</button></div>
         <p className="nc-story-hint">Tap either side to browse stories</p>
       </footer>
       <button className="nc-story-floating-nav prev" type="button" aria-label="Previous story" onClick={onPrevious}><ArrowLeft size={19} /></button><button className="nc-story-floating-nav next" type="button" aria-label="Next story" onClick={onNext}><ArrowRight size={19} /></button>
       {commentsOpen && <section className="nc-story-comments" aria-label="Story comments" onClick={(event) => event.stopPropagation()}>
         <span className="nc-story-sheet-handle" /><header className="nc-story-comments-header"><span className="nc-story-comments-title"><strong>Comments</strong><small>{comments.length} on {person.name}'s story</small></span><button className="nc-story-comments-close" type="button" aria-label="Close comments" onClick={() => { setCommentsOpen(false); setReplyTo(null); }}>×</button></header>
-        <div className="nc-story-comments-list" aria-live="polite">{comments.length ? comments.map((comment, index) => {
-          const isReply = comment.startsWith('↳ ');
-          const content = isReply ? comment.slice(2) : comment;
-          return <article className={`nc-story-comment${isReply ? ' nc-story-comment-reply' : ''}`} key={`${person.id}-${index}`}><span className="nc-story-comment-avatar">{profile.name.slice(0, 1).toUpperCase()}</span><div className="nc-story-comment-content"><strong>{profile.name}</strong><p>{content}</p><div className="nc-story-comment-ops"><button type="button" onClick={() => setReplyTo(comment)}>Reply</button><span className="nc-story-comment-meta">Just now</span></div></div></article>;
-        }) : <p className="nc-story-comment-empty">No comments yet. Start the conversation.</p>}</div>
+        <div className="nc-story-comments-list" aria-live="polite">{rootComments.length ? rootComments.map((comment) => renderComment(comment)) : <p className="nc-story-comment-empty">No comments yet. Start the conversation.</p>}</div>
         {replyTo && <div className="nc-story-reply-indicator">Replying to a comment <button type="button" onClick={() => setReplyTo(null)}>Cancel</button></div>}
         <form className="nc-story-comment-form" onSubmit={submitComment}><input autoFocus aria-label={replyTo ? 'Write a reply' : 'Write a comment'} placeholder={replyTo ? 'Write a reply…' : 'Write a comment…'} maxLength={240} value={commentText} onChange={(event) => setCommentText(event.target.value)} /><button type="submit" disabled={!commentText.trim()}>{replyTo ? 'Reply' : 'Send'}</button></form>
       </section>}

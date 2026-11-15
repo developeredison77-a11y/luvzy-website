@@ -1,3 +1,34 @@
+# Auto-expand newly submitted story replies (2026-11-15)
+
+- **Goal:** Show a reply immediately after submission without requiring a separate expand click.
+- **Risk level:** 1 — targeted interaction-state adjustment.
+- **Owner provider:** Codex.
+- **Status:** Complete.
+- **Done:** Submitting a reply expands its parent thread; older threads remain collapsed until opened.
+- **Verification:** Browser confirms the new reply is immediately visible and the thread reports expanded. Lint/build PASS.
+- **Next action:** None.
+
+# Story reply controls and reaction surface (2026-11-15)
+
+- **Goal:** Collapse replies by default with an expand/minimize control and refine the floating reaction tray.
+- **Risk level:** 2 — interactive comments state and user-facing UI.
+- **Owner provider:** Codex.
+- **Status:** Complete.
+- **Acceptance:** [x] replies hidden until expanded and can be minimized again; [x] reaction tray has a restrained, polished background and responsive sizing; [x] browser interactions, lint, and build pass.
+- **Done:** Added nested reply grouping with per-thread View/Hide controls; restyled the emoji tray as a compact neutral glass capsule.
+- **Verification:** Lint/build PASS. Browser at 390px confirms replies start hidden, expand and minimize, and reaction tray renders as a 334×56px pill. Browser test data restored.
+- **Next action:** None.
+
+# Instagram-style story reaction controls (2026-11-15)
+
+- **Goal:** Remove visible labels from story reaction icons and align the story viewer controls with Instagram Stories.
+- **Risk level:** 1 — small user-facing style and markup adjustment.
+- **Owner provider:** Codex.
+- **Status:** Complete.
+- **Done:** Reactions show emoji only while retaining accessible names. The viewer uses the existing full-screen story style, floating reaction tray, and message-style comment action. Caption clears the controls.
+- **Verification:** Lint/build PASS. Browser PASS: six icons have no visible labels, reaction toggles, comments open, and the caption stays above the reaction tray.
+- **Next action:** None.
+
 # Stories viewer completion (2026-11-15)
 
 - Taken over by Codex at 2026-11-15T08:35Z. Verified existing uncommitted Home Stories work in `src/app/App.tsx` and `src/app/overrides.css`; the 07:38 handoff is stale and its data-source question was resolved by the user's explicit static Stories reference request.

@@ -386,6 +386,23 @@ main.wrap:has(.nc-home){padding-top:0}.nc-home-hero{margin-bottom:0}.nc-home-her
 .nc-story-tap{padding:0;border:0;background:transparent}
 .nc-story-tap:focus-visible{outline:2px solid #fff;outline-offset:-4px;background:#ffffff16}
 .nc-story-tap.prev{right:50%;width:50%}.nc-story-tap.next{left:50%;width:50%}
+.nc-story-shell .nc-story-reactions{left:50%!important;right:auto!important;width:max-content!important;max-width:calc(100% - 24px)!important;transform:translateX(-50%);justify-content:center;gap:clamp(3px,1.5vw,8px);margin:0;padding:7px 12px;border:1px solid #ffffff24!important;border-radius:999px!important;background:linear-gradient(145deg,#24242bdc,#17171de8)!important;box-shadow:0 10px 28px #0007, inset 0 1px #ffffff12!important;backdrop-filter:blur(22px) saturate(145%)!important}
+.nc-story-shell .nc-story-react{box-sizing:border-box;flex:0 0 42px;width:42px;height:42px;padding:0;border:1px solid #ffffff22;border-radius:50%;background:#ffffff12;backdrop-filter:blur(10px)}
+.nc-story-shell .nc-story-react:hover{background:#ffffff1a!important;transform:scale(1.14)}
+.nc-story-shell .nc-story-react.selected{border-color:#ffffffaa!important;border-radius:50%!important;background:#ffffff26!important;box-shadow:0 0 0 2px #fff3!important}
+.nc-story-shell .nc-story-react:focus-visible{outline:2px solid #fff;outline-offset:2px;border-radius:50%}
+.nc-story-shell .nc-story-react .emoji{font-size:25px;line-height:1;transition:transform .16s ease}
+.nc-story-shell .nc-story-react:hover .emoji{transform:scale(1.12)}
+.nc-story-shell .nc-story-react .count{display:none}
+.nc-story-shell .nc-story-footer-actions{gap:11px}
+.nc-story-shell .nc-story-comment-open{min-height:44px;border-radius:999px!important;background:#ffffff10!important;text-align:left}
+.nc-story-shell.nc-story-shell-fullscreen .nc-story-caption{bottom:calc(clamp(122px,16.7dvh,210px) + 72px)!important}
+.nc-story-comment-children{margin-left:14px;padding-left:8px;border-left:1px solid #ffffff18}
+.nc-story-comment-children[hidden]{display:none}
+.nc-story-comment-ops .nc-story-thread-toggle{display:inline-flex;align-items:center;gap:3px;color:#d2b7f2}
+.nc-story-thread-toggle svg{transition:transform .16s ease}
+.nc-story-thread-toggle.expanded svg{transform:rotate(180deg)}
+@media(max-width:700px){.nc-story-shell .nc-story-reactions{gap:clamp(7px,3.5vw,15px)}.nc-story-shell .nc-story-react{flex-basis:40px;width:40px;height:40px}.nc-story-shell .nc-story-react .emoji{font-size:24px}}
 @media(max-width:700px){.nc-home-stories{padding:19px 16px 14px;border-radius:20px}.nc-home-stories-top{gap:12px}.nc-home-stories-heading{gap:9px}.nc-home-stories-icon{width:36px;height:36px}.nc-home-stories-heading p{max-width:420px;font-size:11px}.nc-home-stories-filters button{min-height:34px;padding:7px 12px;font-size:11px}.nc-home-stories-row{gap:20px;min-height:123px;padding-inline:3px}.nc-home-story-person{flex:0 0 82px}.nc-home-story-ring{width:80px;height:80px}.nc-home-story-live,.nc-home-story-online,.nc-home-story-play,.nc-home-story-video{top:71px}.nc-home-story-online{right:calc(50% - 38px)}.nc-home-story-play,.nc-home-story-video{right:calc(50% - 41px)}.nc-home-stories-legend{gap:12px;overflow-x:auto;font-size:10px}.nc-home-stories-legend>span{gap:6px}.nc-home-stories-legend>span+span{padding-left:12px}}
 @media(max-width:460px){.nc-home-stories{padding:16px 13px 12px}.nc-home-stories-top{display:grid;gap:12px}.nc-home-stories-heading h2{font-size:28px}.nc-home-stories-heading p{font-size:10px}.nc-home-stories-filters{justify-self:start}.nc-home-stories-filters button{min-height:31px;padding:6px 13px;font-size:10px}.nc-home-stories-row{gap:12px;min-height:112px}.nc-home-story-person{flex-basis:70px;gap:6px}.nc-home-story-ring{width:68px;height:68px;padding:4px}.nc-home-story-ring img{border-width:3px}.nc-home-story-live{top:60px;font-size:8px}.nc-home-story-online{top:59px;right:calc(50% - 34px);width:14px;height:14px}.nc-home-story-play,.nc-home-story-video{top:58px;right:calc(50% - 36px);width:24px;height:24px}.nc-home-story-person strong{font-size:10px}.nc-home-stories-legend{justify-content:flex-start;gap:10px;margin-top:5px}.nc-home-stories-legend>span{gap:5px;font-size:9px}.nc-home-stories-legend>span+span{padding-left:9px}.nc-home-stories-legend i{width:16px;height:16px;font-size:15px}}
 @media(prefers-reduced-motion:reduce){.nc-home-story-person{transition:none}}
