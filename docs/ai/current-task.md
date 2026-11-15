@@ -1,3 +1,15 @@
+# Stories viewer completion (2026-11-15)
+
+- Taken over by Codex at 2026-11-15T08:35Z. Verified existing uncommitted Home Stories work in `src/app/App.tsx` and `src/app/overrides.css`; the 07:38 handoff is stale and its data-source question was resolved by the user's explicit static Stories reference request.
+- **Goal:** Keep story avatars circular and make them open stories with reaction, comment, and reply controls.
+- **Risk level:** 2 — user-facing interactive view with persisted local state.
+- **Owner provider:** Codex.
+- **Status:** Complete.
+- **Acceptance:** [x] circular story avatars; [x] story image opens from each avatar; [x] reactions, comments, and replies use the existing persisted local store; [x] lint/build and browser interactions pass.
+- **Done:** Reconnected existing story fixtures and store actions to an accessible viewer with next/previous navigation, reactions, comments, and replies. Locked avatar ring and image dimensions to circles.
+- **Verification:** Lint/build PASS. Browser PASS: story image loaded, reaction toggled, comment and nested reply rendered, next story advanced, close/comment inputs receive focus correctly, and avatars measured 68×68px mobile / 96×96px desktop. Browser local demo state restored after interaction checks.
+- **Next action:** None.
+
 # Static Neon Home dashboard restoration (2026-11-15)
 
 - **Goal:** Match `Luvzy Neon Video Dating Dashboard.png` with local static profile/demo data and restore the guided random-call popups from both “Start Random Call” and “Find Random Call”.

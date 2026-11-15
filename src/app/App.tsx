@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import {
-  AlertTriangle, ArrowLeft, ArrowRight, ArrowUpDown, Bell, Check, ChevronDown, ChevronRight, CircleHelp, Clock3, Compass, Coins, Heart, ChartNoAxesColumn, Landmark,
+  AlertTriangle, ArrowLeft, ArrowRight, ArrowUpDown, Bell, CalendarDays, Check, ChevronDown, ChevronRight, CircleHelp, Clock3, Compass, Coins, Heart, ChartNoAxesColumn, Landmark,
   BriefcaseBusiness, Home, Layers3, LockKeyhole, LogOut, MapPin, MessageCircle, MoreVertical, Phone, Plus, Search, Send, Settings, Shield, SlidersHorizontal, Smile, Sparkles, Star, Trash2, UsersRound, Video, Wallet, X, Zap,
 } from 'lucide-react';
-import { cities, coinPacks, interests, people } from '../mocks/fixtures';
+import { cities, coinPacks, interests, people, storyImages } from '../mocks/fixtures';
 import { LocalProfileRepository } from '../services/profileRepository';
 import { useDemoStore } from '../stores/demoStore';
 import type { CallRecord, ContactAction, Person, Role } from '../types/models';
@@ -621,7 +621,90 @@ function HomePage() {
       <div className="nc-random-selection"><div className="nc-random-avatar-stack">{activePeople.slice(0, 3).map((person) => <img key={person.id} src={person.photo} alt=""/>)}<span>+{Math.max(randomCandidates.length - 3, 0)}</span></div></div>
       <div className="nc-random-actions">{suggestion && <CallButton person={suggestion} featured randomCandidates={randomCandidates} label="Find Random Call" />}</div>
     </section>
+    <HomeStories blocked={blocked} likes={likes} />
   </section>;
+}
+
+function HomeStories({ blocked, likes }: { blocked: number[]; likes: number[] }) {
+  const [filter, setFilter] = useState<'all' | 'following'>('all');
+  const [viewingStory, setViewingStory] = useState<number | null>(null);
+  const storyPeople = people.filter((person) => !blocked.includes(person.id));
+  const visiblePeople = filter === 'following' ? storyPeople.filter((person) => likes.includes(person.id)) : storyPeople;
+  const activeStoryIndex = visiblePeople.findIndex((person) => person.id === viewingStory);
+  const activeStory = activeStoryIndex >= 0 ? visiblePeople[activeStoryIndex] : null;
+
+  return <section className="nc-home-stories" aria-labelledby="home-stories-title">
+    <div className="nc-home-stories-top">
+      <div className="nc-home-stories-heading">
+        <span className="nc-home-stories-icon"><Video size={22} /></span>
+        <div><span className="nc-home-stories-eyebrow">MOMENTS FROM LUVZY</span><h2 id="home-stories-title">Stories <span aria-hidden="true">▶</span></h2><p>Real moments, daily updates, and stories from people on Luvzy.</p></div>
+      </div>
+      <div className="nc-home-stories-filters" role="group" aria-label="Filter stories">
+        <button type="button" className={filter === 'all' ? 'selected' : ''} aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>All Stories</button>
+        <button type="button" className={filter === 'following' ? 'selected' : ''} aria-pressed={filter === 'following'} onClick={() => setFilter('following')}>Following</button>
+      </div>
+    </div>
+    <div className="nc-home-stories-row" aria-label="Stories from Luvzy members">
+      {visiblePeople.slice(0, 8).map((person, index) => <button className="nc-home-story-person" type="button" onClick={() => setViewingStory(person.id)} key={person.id} aria-label={`Watch ${person.name}'s story`}>
+        <span className={`nc-home-story-ring${index === 2 ? ' seen' : ''}`}><img src={person.photo} alt="" loading="lazy" /></span>
+        {index === 0 && <span className="nc-home-story-live">◉ LIVE</span>}
+        {(index === 1 || index === 5) && <span className="nc-home-story-online" aria-label="Online" />}
+        {index === 3 && <span className="nc-home-story-play" aria-hidden="true">▶</span>}
+        {index === 4 && <span className="nc-home-story-video" aria-hidden="true"><Video size={15} fill="currentColor" /></span>}
+        <strong>{person.name}</strong>
+      </button>)}
+      {filter === 'following' && visiblePeople.length === 0 && <p className="nc-home-stories-empty">Like profiles to see their stories here.</p>}
+    </div>
+    <div className="nc-home-stories-legend" aria-label="Story status key"><span><i className="live" />Live Stories</span><span><i className="video">▶</i>Video Moments</span><span><i className="online" />Online Now</span><span><i className="new"><Clock3 size={20} /></i>New Stories</span></div>
+    {activeStory && <HomeStoryViewer person={activeStory} storyIndex={activeStoryIndex} storyCount={visiblePeople.length} onClose={() => setViewingStory(null)} onPrevious={() => setViewingStory(visiblePeople[(activeStoryIndex - 1 + visiblePeople.length) % visiblePeople.length].id)} onNext={() => setViewingStory(visiblePeople[(activeStoryIndex + 1) % visiblePeople.length].id)} />}
+  </section>;
+}
+
+function HomeStoryViewer({ person, storyIndex, storyCount, onClose, onPrevious, onNext }: { person: Person; storyIndex: number; storyCount: number; onClose: () => void; onPrevious: () => void; onNext: () => void }) {
+  const { profile, storyReactions, storyComments, toggleStoryReaction, addStoryComment } = useDemoStore();
+  const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const [replyTo, setReplyTo] = useState<string | null>(null);
+  const comments = storyComments[person.id] ?? [];
+  useDialogAccessibility(true, onClose);
+  useEffect(() => {
+    document.body.classList.add('nc-story-open');
+    return () => document.body.classList.remove('nc-story-open');
+  }, []);
+  const submitComment = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const text = commentText.trim();
+    if (!text) return;
+    addStoryComment(person.id, replyTo ? `↳ ${replyTo}: ${text}` : text);
+    setCommentText('');
+    setReplyTo(null);
+  };
+
+  return createPortal(<div className="nc-story-overlay" onClick={onClose}>
+    <section className="nc-story-shell" role="dialog" aria-modal="true" aria-label={`${person.name}'s story`} onClick={(event) => event.stopPropagation()}>
+      <div className="nc-story-progress" aria-label={`Story ${storyIndex + 1} of ${storyCount}`}><span className="nc-story-track"><span style={{ width: '100%' }} /></span></div>
+      <header className="nc-story-header"><img className="nc-story-author-photo" src={person.photo} alt="" /><span className="nc-story-author"><strong>{person.name}</strong><small>{person.city} · Just now</small></span><button type="button" aria-label="Close story" onClick={onClose}><X /></button></header>
+      <div className="nc-story-visual"><img className="nc-story-media" src={storyImages[storyIndex % storyImages.length]} alt={`${person.name}'s story`} /><button className="nc-story-tap prev" type="button" aria-label="Previous story" onClick={onPrevious} /><button className="nc-story-tap next" type="button" aria-label="Next story" onClick={onNext} /></div>
+      <div className="nc-story-caption"><span>STORY · {person.city.toUpperCase()}</span><h3>{person.bio}</h3></div>
+      <footer className="nc-story-footer">
+        <p className="nc-story-reaction-label">Send a reaction</p>
+        <div className="nc-story-reactions" aria-label="Story reactions">{[['❤️', 'Love'], ['🔥', 'Fire'], ['😂', 'Funny'], ['😮', 'Wow']].map(([emoji, label]) => <button className={`nc-story-react${storyReactions[person.id] === emoji ? ' selected' : ''}`} type="button" key={emoji} aria-label={`${label} reaction`} aria-pressed={storyReactions[person.id] === emoji} onClick={() => toggleStoryReaction(person.id, emoji)}><span className="emoji">{emoji}</span><span className="count">{storyReactions[person.id] === emoji ? 'Sent' : label}</span></button>)}</div>
+        <div className="nc-story-footer-actions"><button className="nc-story-comment-open" type="button" onClick={() => setCommentsOpen(true)}>Write a comment…</button><button className="nc-story-comment-total" type="button" aria-label={`Open ${comments.length} comments`} onClick={() => setCommentsOpen(true)}><MessageCircle size={15} /> {comments.length}</button></div>
+        <p className="nc-story-hint">Tap either side to browse stories</p>
+      </footer>
+      <button className="nc-story-floating-nav prev" type="button" aria-label="Previous story" onClick={onPrevious}><ArrowLeft size={19} /></button><button className="nc-story-floating-nav next" type="button" aria-label="Next story" onClick={onNext}><ArrowRight size={19} /></button>
+      {commentsOpen && <section className="nc-story-comments" aria-label="Story comments" onClick={(event) => event.stopPropagation()}>
+        <span className="nc-story-sheet-handle" /><header className="nc-story-comments-header"><span className="nc-story-comments-title"><strong>Comments</strong><small>{comments.length} on {person.name}'s story</small></span><button className="nc-story-comments-close" type="button" aria-label="Close comments" onClick={() => { setCommentsOpen(false); setReplyTo(null); }}>×</button></header>
+        <div className="nc-story-comments-list" aria-live="polite">{comments.length ? comments.map((comment, index) => {
+          const isReply = comment.startsWith('↳ ');
+          const content = isReply ? comment.slice(2) : comment;
+          return <article className={`nc-story-comment${isReply ? ' nc-story-comment-reply' : ''}`} key={`${person.id}-${index}`}><span className="nc-story-comment-avatar">{profile.name.slice(0, 1).toUpperCase()}</span><div className="nc-story-comment-content"><strong>{profile.name}</strong><p>{content}</p><div className="nc-story-comment-ops"><button type="button" onClick={() => setReplyTo(comment)}>Reply</button><span className="nc-story-comment-meta">Just now</span></div></div></article>;
+        }) : <p className="nc-story-comment-empty">No comments yet. Start the conversation.</p>}</div>
+        {replyTo && <div className="nc-story-reply-indicator">Replying to a comment <button type="button" onClick={() => setReplyTo(null)}>Cancel</button></div>}
+        <form className="nc-story-comment-form" onSubmit={submitComment}><input autoFocus aria-label={replyTo ? 'Write a reply' : 'Write a comment'} placeholder={replyTo ? 'Write a reply…' : 'Write a comment…'} maxLength={240} value={commentText} onChange={(event) => setCommentText(event.target.value)} /><button type="submit" disabled={!commentText.trim()}>{replyTo ? 'Reply' : 'Send'}</button></form>
+      </section>}
+    </section>
+  </div>, document.body);
 }
 
 function HomeCallHero({ profile, featuredPerson, onlineCount, interestedCount, randomCall }: { profile: { name: string }; featuredPerson?: Person; onlineCount: number; interestedCount: number; randomCall: React.ReactNode }) {

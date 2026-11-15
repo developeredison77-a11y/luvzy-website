@@ -370,3 +370,9 @@
 - **Rationale:** Match the supplied dashboard reference and its local demo interaction behavior.
 - **Supersedes:** The latest request to keep only the welcome hero on `/home`.
 - **Approved by:** User correction.
+
+## Home Stories viewer (2026-11-15T08:38Z)
+
+- Use the existing local `storyImages`, `storyReactions`, and `storyComments` state for the Home Stories demo viewer; do not add a backend dependency or change the persisted model.
+- Each avatar opens one sample story; reaction selection, comments, reply entries, and story navigation remain local. Reply entries keep their marker in persisted strings and render as nested replies.
+- Lock ring and image width/height and `box-sizing` so avatar circles remain round at every breakpoint.

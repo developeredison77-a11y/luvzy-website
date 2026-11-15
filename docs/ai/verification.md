@@ -590,3 +590,12 @@ Automated unit and E2E suites were not run for this UI-only request.
 - Mobile browser (390×844) — PASS: five profile cards render and document width is 390px; no horizontal overflow.
 - Browser screenshots: `/tmp/luvzy-home-dashboard.png`, `/tmp/luvzy-home-dashboard-mobile.png`.
 - Automated test suite — NOT RUN (not requested). Git snapshot unavailable; directory has no Git metadata.
+
+## Home Stories viewer and round avatars (2026-11-15T08:38Z)
+
+- `pnpm run lint` — PASS; ESLint reports no issues.
+- `pnpm run build` — PASS; 1,620 modules transformed. Existing Vite advisory: 525.39 kB JS chunk exceeds 500 kB.
+- Browser first pass — FAIL due the script expecting the stored reply marker in visible text and clicking a desktop-only next arrow at mobile width. State restoration ran in `finally`; verified no modal remained, no verification text remained in local storage, and avatar measured 68×68px.
+- Browser corrected interaction pass — PASS with `/api/v1/auth/me` mocked for sign-in: story image loaded; Love reaction selected; comment and nested reply rendered; mobile tap advanced Ananya to Mira; avatar measured circular at 68×68px. Original local demo storage restored and page reloaded afterward.
+- Backend was not running; unrelated `/api/v1/notifications` request returned 401. Automated test suite — NOT RUN (not requested).
+- Final browser focus and media check — PASS: story opens with focus on Close story; comments open with focus on the comment input; story image resolves at 1200×1800; desktop avatar measured 96×96px and mobile 68×68px.
